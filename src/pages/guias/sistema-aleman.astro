@@ -1,0 +1,96 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Calculator from '../../components/Calculator';
+import FAQ from '../../components/FAQ.astro';
+import AdUnit from '../../components/AdUnit.astro';
+
+const faqs = [
+  {
+    question: '¿Qué ventaja tiene el sistema alemán sobre el francés?',
+    answer: 'El sistema alemán genera menos intereses totales porque el saldo se reduce más rápidamente. Sin embargo, las primeras cuotas son más altas.',
+  },
+  {
+    question: '¿Cómo se calcula la cuota en el sistema alemán?',
+    answer: 'Cuota = Capital fijo + Intereses del saldo. Capital fijo = Monto ÷ N. Intereses = Saldo × tasa mensual.',
+  },
+  {
+    question: '¿El sistema alemán es común en América Latina?',
+    answer: 'Es menos común que el francés, pero se utiliza en algunos créditos hipotecarios y empresariales en Argentina, Chile y Colombia.',
+  },
+];
+---
+
+<LandingLayout
+  title="Sistema de Amortización Alemán: Guía Completa | SimularCred"
+  description="Aprende qué es el sistema de amortización alemán, cómo funciona, su diferencia con el sistema francés y cuándo conviene en América Latina."
+  canonical="https://simuladorcredito.lat/guias/sistema-aleman"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Guías', href: '/guias/sistema-frances' },
+    { label: 'Sistema Alemán' },
+  ]}
+>
+  <article class="prose prose-blue max-w-4xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-primary-900 mb-4">Sistema de Amortización Alemán</h1>
+
+    <p class="text-lg text-gray-600 mb-6">
+      El sistema de amortización alemán se distingue porque la amortización de capital (cuota de capital) es <strong>fija</strong> durante todo el préstamo, mientras que los intereses disminuyen con el tiempo.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">¿Cómo funciona?</h2>
+    <p class="text-gray-700 mb-4">
+      Cada mes se paga la misma cantidad de capital. Además, se pagan los intereses calculados sobre el saldo pendiente, que va disminuyendo. Por eso, la cuota total va reduciéndose mes a mes.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">La Fórmula</h2>
+    <div class="bg-green-50 border-l-4 border-green-600 p-4 rounded-r-lg mb-4 space-y-2">
+      <p class="font-mono text-green-900">Capital fijo = P ÷ n</p>
+      <p class="font-mono text-green-900">Interés mes k = Saldo(k-1) × r</p>
+      <p class="font-mono text-green-900">Cuota mes k = Capital fijo + Interés mes k</p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Ejemplo Práctico</h2>
+    <p class="text-gray-700 mb-4">
+      Préstamo de MXN 200,000 a 15% anual durante 3 años (36 cuotas):
+    </p>
+    <ul class="text-gray-700 mb-4 space-y-1">
+      <li>Capital fijo mensual: MXN 200,000 ÷ 36 = MXN 5,556</li>
+      <li>Primera cuota: MXN 5,556 + (200,000 × 1.25%) = MXN 8,056</li>
+      <li>Última cuota: MXN 5,556 + (5,556 × 1.25%) = MXN 5,625</li>
+      <li>Total intereses: aprox. MXN 45,500 (menos que el sistema francés)</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Ventajas del Sistema Alemán</h2>
+    <ul class="text-gray-700 mb-4 space-y-2">
+      <li>✅ <strong>Menor costo total</strong>: se pagan menos intereses que en el sistema francés</li>
+      <li>✅ <strong>Saldo decrece rápido</strong>: el capital se amortiza a ritmo constante</li>
+      <li>✅ <strong>Menos riesgo</strong>: la deuda se reduce más rápidamente</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Desventajas</h2>
+    <ul class="text-gray-700 mb-4 space-y-2">
+      <li>❌ <strong>Primeras cuotas más altas</strong>: requiere mayor liquidez inicial</li>
+      <li>❌ <strong>Cuota variable</strong>: más difícil de planificar mes a mes</li>
+      <li>❌ <strong>Menos común</strong>: no todos los bancos lo ofrecen</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">¿Cuándo elegir el sistema alemán?</h2>
+    <p class="text-gray-700 mb-4">
+      Conviene cuando tienes mayor capacidad de pago al inicio del crédito, o cuando quieres minimizar el costo total de intereses. Es popular en financiamiento empresarial y en créditos con prepago.
+    </p>
+  </article>
+
+  <div class="max-w-4xl mx-auto mt-6 mb-10">
+    <Calculator client:visible currency="MXN" />
+  </div>
+
+  <AdUnit slot="mid" format="horizontal" />
+
+  <div class="max-w-4xl mx-auto">
+    <FAQ items={faqs} />
+    <div class="mt-8 flex flex-wrap gap-4 text-sm">
+      <a href="/guias/sistema-frances" class="text-primary-700 underline">→ Ver Sistema Francés</a>
+      <a href="/guias/comparar-creditos" class="text-primary-700 underline">→ Cómo Comparar Créditos</a>
+    </div>
+  </div>
+</LandingLayout>

@@ -1,0 +1,43 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-gray-900 text-gray-300 mt-16 py-12">
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <h3 class="text-white font-bold mb-3">SimularCred</h3>
+        <p class="text-sm text-gray-400">Calculadora de créditos para América Latina.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-3">Guías</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/guias/sistema-frances" class="hover:text-white transition-colors">Sistema Francés</a></li>
+          <li><a href="/guias/sistema-aleman" class="hover:text-white transition-colors">Sistema Alemán</a></li>
+          <li><a href="/guias/como-calcular-cuota" class="hover:text-white transition-colors">Calcular Cuota</a></li>
+          <li><a href="/guias/comparar-creditos" class="hover:text-white transition-colors">Comparar Créditos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-3">Países</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/paises/mexico" class="hover:text-white transition-colors">México</a></li>
+          <li><a href="/paises/colombia" class="hover:text-white transition-colors">Colombia</a></li>
+          <li><a href="/paises/argentina" class="hover:text-white transition-colors">Argentina</a></li>
+          <li><a href="/paises/chile" class="hover:text-white transition-colors">Chile</a></li>
+          <li><a href="/paises/peru" class="hover:text-white transition-colors">Perú</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-3">Legal</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/sobre-nosotros" class="hover:text-white transition-colors">Sobre Nosotros</a></li>
+          <li><a href="/politica-privacidad" class="hover:text-white transition-colors">Política de Privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+      <p>© {year} SimularCred. Todos los derechos reservados. Solo para fines informativos.</p>
+    </div>
+  </div>
+</footer>

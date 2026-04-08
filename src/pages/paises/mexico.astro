@@ -1,0 +1,56 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Calculator from '../../components/Calculator';
+import FAQ from '../../components/FAQ.astro';
+import { generateCombos } from '../../lib/landing-combos';
+
+const mxnCombos = generateCombos().filter((c) => c.currency === 'MXN').slice(0, 8);
+
+const faqs = [
+  {
+    question: '¿Cuál es la tasa de interés promedio para créditos personales en México?',
+    answer: 'En 2024, las tasas para créditos personales en México oscilan entre 20% y 80% anual según el banco. Para créditos hipotecarios, entre 9% y 14% anual.',
+  },
+  {
+    question: '¿Qué es el CAT en México?',
+    answer: 'El Costo Anual Total (CAT) incluye tasa de interés, comisiones y todos los costos del crédito. Es el indicador regulado por Banxico para comparar productos financieros.',
+  },
+  {
+    question: '¿Cuáles son los principales bancos que ofrecen créditos en México?',
+    answer: 'BBVA, Banorte, Santander, HSBC, Scotiabank, Citibanamex y muchas instituciones de microfinanzas como Compartamos.',
+  },
+];
+---
+
+<LandingLayout
+  title="Simulador de Crédito México (MXN) | SimularCred"
+  description="Calcula préstamos en pesos mexicanos (MXN). Tasas vigentes, tabla de amortización francesa y alemana para créditos en México."
+  canonical="https://simuladorcredito.lat/paises/mexico"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Países' },
+    { label: 'México' },
+  ]}
+>
+  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">🇲🇽 Simulador de Crédito en México</h1>
+  <p class="text-lg text-gray-600 mb-8">Calcula préstamos en pesos mexicanos (MXN) con las tasas referenciales del mercado.</p>
+
+  <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-sm text-amber-800">
+    <strong>Tasas de referencia México 2024:</strong> Hipotecario 9–14% • Personal 20–80% • Nómina 15–35% • Auto 8–15%
+  </div>
+
+  <Calculator client:visible defaultAmount={200000} defaultRate={12} defaultYears={10} currency="MXN" />
+
+  <section class="mt-10 mb-8">
+    <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en México</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {mxnCombos.map((c) => (
+        <a href={`/simulador/${c.slug}`} class="bg-white border rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
+          <span class="font-semibold text-primary-800">{c.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+</LandingLayout>

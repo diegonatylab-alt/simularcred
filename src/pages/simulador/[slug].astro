@@ -1,0 +1,140 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Calculator from '../../components/Calculator';
+import AmortizationTable from '../../components/AmortizationTable';
+import LoanChart from '../../components/Chart';
+import AdUnit from '../../components/AdUnit.astro';
+import FAQ from '../../components/FAQ.astro';
+import { generateCombos } from '../../lib/landing-combos';
+import { calculateFrench, calculateGerman } from '../../lib/amortization';
+import { formatCurrency } from '../../lib/formatters';
+
+export async function getStaticPaths() {
+  const combos = generateCombos();
+  return combos.map((combo) => ({
+    params: { slug: combo.slug },
+    props: { combo },
+  }));
+}
+
+const { combo } = Astro.props;
+const { amount, years, rate, currency, country, title, description } = combo;
+
+const input = { principal: amount, annualRate: rate, termMonths: years * 12 };
+const french = calculateFrench(input);
+const german = calculateGerman(input);
+const fmt = (n: number) => formatCurrency(n, currency);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialProduct',
+  name: title,
+  description,
+  url: `https://simuladorcredito.lat/simulador/${combo.slug}`,
+  feesAndCommissionsSpecification: `Tasa anual: ${rate}%`,
+};
+
+const faqs = [
+  {
+    question: `¿Cuánto pago mensualmente por ${fmt(amount)} a ${rate}% en ${years} años?`,
+    answer: `Con sistema francés pagarás ${fmt(french.monthlyPayment)} por mes. Con sistema alemán, la primera cuota es ${fmt(german.monthlyPayment)} y va disminuyendo.`,
+  },
+  {
+    question: `¿Cuánto es el total de intereses del crédito?`,
+    answer: `Sistema francés: ${fmt(french.totalInterest)} en intereses totales. Sistema alemán: ${fmt(german.totalInterest)} en intereses totales.`,
+  },
+  {
+    question: `¿Qué sistema de amortización conviene en ${country}?`,
+    answer: `Depende de tu flujo de caja. El sistema francés ofrece cuota fija. El sistema alemán tiene mayor primera cuota pero menor costo total.`,
+  },
+];
+
+const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
+---
+
+<LandingLayout
+  title={`${title} | SimularCred`}
+  description={description}
+  canonical={canonicalUrl}
+  schema={schema}
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Simulador', href: '/simulador' },
+    { label: title },
+  ]}
+>
+  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">{title}</h1>
+  <p class="text-gray-600 mb-8">{description}</p>
+
+  <!-- Summary Comparison -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+      <h2 class="font-bold text-primary-800 mb-4 text-lg">Sistema Francés</h2>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between"><dt class="text-gray-600">Cuota mensual:</dt><dd class="font-bold">{fmt(french.monthlyPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600">Total a pagar:</dt><dd class="font-bold">{fmt(french.totalPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600">Total intereses:</dt><dd class="font-bold text-red-600">{fmt(french.totalInterest)}</dd></div>
+      </dl>
+    </div>
+    <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+      <h2 class="font-bold text-green-800 mb-4 text-lg">Sistema Alemán</h2>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between"><dt class="text-gray-600">Primera cuota:</dt><dd class="font-bold">{fmt(german.monthlyPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600">Total a pagar:</dt><dd class="font-bold">{fmt(german.totalPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600">Total intereses:</dt><dd class="font-bold text-red-600">{fmt(german.totalInterest)}</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <AdUnit slot="top-ad" format="horizontal" />
+
+  <!-- Interactive Calculator -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold text-primary-800 mb-4">Personaliza tu Simulación</h2>
+    <Calculator
+      client:visible
+      defaultAmount={amount}
+      defaultRate={rate}
+      defaultYears={years}
+      currency={currency}
+    />
+  </section>
+
+  <!-- Chart -->
+  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+    <h2 class="text-xl font-bold text-primary-800 mb-4">Evolución del Préstamo</h2>
+    <LoanChart
+      client:visible
+      frenchSchedule={french.schedule}
+      germanSchedule={german.schedule}
+      currency={currency}
+    />
+  </section>
+
+  <AdUnit slot="mid-ad" format="rectangle" />
+
+  <!-- Amortization Tables -->
+  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+    <h2 class="text-xl font-bold text-primary-800 mb-4">Tabla Amortización — Sistema Francés</h2>
+    <AmortizationTable client:visible schedule={french.schedule} currency={currency} />
+  </section>
+
+  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+    <h2 class="text-xl font-bold text-green-800 mb-4">Tabla Amortización — Sistema Alemán</h2>
+    <AmortizationTable client:visible schedule={german.schedule} currency={currency} />
+  </section>
+
+  <AdUnit slot="bottom-ad" format="horizontal" />
+
+  <!-- Internal Links -->
+  <section class="mb-10">
+    <h2 class="text-lg font-bold text-primary-800 mb-4">Guías Relacionadas</h2>
+    <div class="flex flex-wrap gap-3">
+      <a href="/guias/sistema-frances" class="text-sm text-primary-700 underline hover:no-underline">Sistema Francés</a>
+      <a href="/guias/sistema-aleman" class="text-sm text-primary-700 underline hover:no-underline">Sistema Alemán</a>
+      <a href="/guias/comparar-creditos" class="text-sm text-primary-700 underline hover:no-underline">Comparar Créditos</a>
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+</LandingLayout>

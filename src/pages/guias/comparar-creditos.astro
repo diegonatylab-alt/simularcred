@@ -1,0 +1,72 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import FAQ from '../../components/FAQ.astro';
+
+const faqs = [
+  {
+    question: '¿Qué es la CAT o CAE?',
+    answer: 'El Costo Anual Total (CAT en México) o Carga Anual Equivalente (CAE en Chile) incluye todos los costos del crédito: tasa, comisiones, seguros. Es el indicador más completo para comparar.',
+  },
+  {
+    question: '¿Cómo comparo dos créditos con diferentes plazos?',
+    answer: 'Compara el costo total en términos absolutos y el CAT/CAE. Un plazo más largo reduce la cuota pero aumenta el total de intereses pagados.',
+  },
+];
+---
+
+<LandingLayout
+  title="Cómo Comparar Créditos y Préstamos | SimularCred"
+  description="Guía para comparar créditos usando tasa de interés, CAT, costo total, plazo y sistema de amortización. Toma la mejor decisión financiera."
+  canonical="https://simuladorcredito.lat/guias/comparar-creditos"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Guías' },
+    { label: 'Comparar Créditos' },
+  ]}
+>
+  <article class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-primary-900 mb-4">Cómo Comparar Créditos</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Elegir el mejor crédito va más allá de comparar solo la tasa de interés. Aquí te mostramos todos los factores que debes considerar.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">1. Tasa de Interés Anual</h2>
+    <p class="text-gray-700 mb-6">
+      La tasa nominal anual es el punto de partida. Sin embargo, no incluye comisiones ni seguros. Siempre busca la Tasa Anual Efectiva (TAE) o el CAT.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">2. Costo Anual Total (CAT)</h2>
+    <p class="text-gray-700 mb-6">
+      El CAT (México), CAE (Chile) o TCEA (Perú) incorpora todos los costos: tasa, comisiones de apertura, seguros de vida y daños. Es el indicador más honesto.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">3. Total de Intereses Pagados</h2>
+    <p class="text-gray-700 mb-6">
+      Calcula cuánto pagarás en total al banco menos el capital. Dos créditos con la misma cuota mensual pueden tener totales muy distintos si el plazo es diferente.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">4. Sistema de Amortización</h2>
+    <p class="text-gray-700 mb-6">
+      El sistema francés tiene cuota fija. El alemán tiene capital fijo y menor costo total. Compara ambos para el mismo monto y plazo.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">5. Condiciones de Prepago</h2>
+    <p class="text-gray-700 mb-6">
+      Verifica si puedes pagar anticipadamente sin penalización. Los prepagos reducen significativamente el costo del crédito.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mb-3">6. Seguros Obligatorios</h2>
+    <p class="text-gray-700 mb-4">
+      Muchos créditos hipotecarios incluyen seguro de vida y de daños obligatorios. Estos costos deben incluirse en la comparación.
+    </p>
+  </article>
+
+  <div class="max-w-4xl mx-auto mt-8">
+    <FAQ items={faqs} />
+    <div class="mt-8 flex flex-wrap gap-4 text-sm">
+      <a href="/guias/sistema-frances" class="text-primary-700 underline">→ Sistema Francés</a>
+      <a href="/guias/sistema-aleman" class="text-primary-700 underline">→ Sistema Alemán</a>
+      <a href="/" class="text-primary-700 underline">→ Simulador</a>
+    </div>
+  </div>
+</LandingLayout>

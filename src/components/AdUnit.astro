@@ -1,0 +1,39 @@
+---
+interface Props {
+  slot: string;
+  format: 'horizontal' | 'rectangle' | 'vertical';
+}
+
+const { slot, format } = Astro.props;
+
+const sizeClasses: Record<string, string> = {
+  horizontal: 'w-full h-24',
+  rectangle: 'w-full h-64',
+  vertical: 'w-40 h-96',
+};
+---
+
+<div
+  class={`ad-unit bg-gray-100 flex items-center justify-center text-gray-400 text-xs rounded-lg overflow-hidden ${sizeClasses[format]}`}
+  data-ad-slot={slot}
+  data-ad-format={format}
+  data-ad-client="ca-pub-XXXXXXXXXX"
+>
+  <span>Publicidad</span>
+</div>
+
+<script>
+  const adUnits = document.querySelectorAll<HTMLElement>('.ad-unit');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Initialize AdSense here when real pub ID is available
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: '200px' }
+  );
+  adUnits.forEach((el) => observer.observe(el));
+</script>
