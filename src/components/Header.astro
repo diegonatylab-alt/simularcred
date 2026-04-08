@@ -1,9 +1,17 @@
 ---
-const navLinks = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Guías', href: '/guias/sistema-frances' },
-  { label: 'Países', href: '/paises/mexico' },
-  { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
+const guiasLinks = [
+  { label: 'Sistema Francés', href: '/guias/sistema-frances' },
+  { label: 'Sistema Alemán', href: '/guias/sistema-aleman' },
+  { label: 'Cómo Calcular tu Cuota', href: '/guias/como-calcular-cuota' },
+  { label: 'Comparar Créditos', href: '/guias/comparar-creditos' },
+];
+
+const paisesLinks = [
+  { label: '🇲🇽 México', href: '/paises/mexico' },
+  { label: '🇨🇴 Colombia', href: '/paises/colombia' },
+  { label: '🇦🇷 Argentina', href: '/paises/argentina' },
+  { label: '🇨🇱 Chile', href: '/paises/chile' },
+  { label: '🇵🇪 Perú', href: '/paises/peru' },
 ];
 ---
 
@@ -18,13 +26,48 @@ const navLinks = [
         <span class="text-xl font-bold text-primary-800">SimularCred</span>
       </a>
       <ul class="hidden md:flex items-center gap-6">
-        {navLinks.map((link) => (
-          <li>
-            <a href={link.href} class="text-gray-600 hover:text-primary-700 font-medium transition-colors">
-              {link.label}
-            </a>
-          </li>
-        ))}
+        <li>
+          <a href="/" class="text-gray-600 hover:text-primary-700 font-medium transition-colors">Inicio</a>
+        </li>
+        <!-- Guías dropdown -->
+        <li class="relative group">
+          <button class="flex items-center gap-1 text-gray-600 hover:text-primary-700 font-medium transition-colors">
+            Guías
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <ul class="absolute left-0 top-full mt-1 w-52 bg-white border border-gray-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 py-1 z-50">
+            {guiasLinks.map((link) => (
+              <li>
+                <a href={link.href} class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <!-- Países dropdown -->
+        <li class="relative group">
+          <button class="flex items-center gap-1 text-gray-600 hover:text-primary-700 font-medium transition-colors">
+            Países
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <ul class="absolute left-0 top-full mt-1 w-44 bg-white border border-gray-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 py-1 z-50">
+            {paisesLinks.map((link) => (
+              <li>
+                <a href={link.href} class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <a href="/sobre-nosotros" class="text-gray-600 hover:text-primary-700 font-medium transition-colors">Sobre Nosotros</a>
+        </li>
       </ul>
       <button
         id="mobile-menu-btn"
@@ -36,15 +79,35 @@ const navLinks = [
         </svg>
       </button>
     </nav>
+    <!-- Mobile Menu -->
     <nav id="mobile-menu" class="md:hidden hidden pb-4">
-      <ul class="flex flex-col gap-3">
-        {navLinks.map((link) => (
-          <li>
-            <a href={link.href} class="block text-gray-700 hover:text-primary-700 font-medium py-1">
-              {link.label}
-            </a>
-          </li>
-        ))}
+      <ul class="flex flex-col gap-1">
+        <li>
+          <a href="/" class="block text-gray-700 hover:text-primary-700 font-medium py-1">Inicio</a>
+        </li>
+        <li>
+          <span class="block text-gray-700 font-medium py-1">Guías</span>
+          <ul class="ml-4 flex flex-col gap-1">
+            {guiasLinks.map((link) => (
+              <li>
+                <a href={link.href} class="block text-gray-600 hover:text-primary-700 text-sm py-1">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <span class="block text-gray-700 font-medium py-1">Países</span>
+          <ul class="ml-4 flex flex-col gap-1">
+            {paisesLinks.map((link) => (
+              <li>
+                <a href={link.href} class="block text-gray-600 hover:text-primary-700 text-sm py-1">{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <a href="/sobre-nosotros" class="block text-gray-700 hover:text-primary-700 font-medium py-1">Sobre Nosotros</a>
+        </li>
       </ul>
     </nav>
   </div>
