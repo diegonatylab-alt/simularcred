@@ -1,6 +1,6 @@
 ---
 import LandingLayout from '../../layouts/LandingLayout.astro';
-import Calculator from '../../components/Calculator';
+import SimulatorApp from '../../components/SimulatorApp';
 import FAQ from '../../components/FAQ.astro';
 import { generateCombos } from '../../lib/landing-combos';
 
@@ -35,7 +35,7 @@ const faqs = [
     <strong>Tasas de referencia Chile 2024:</strong> Hipotecario 4–7% • Consumo 12–24% • Automotriz 8–14%
   </div>
 
-  <Calculator client:visible defaultAmount={10000000} defaultRate={8} defaultYears={5} currency="CLP" />
+  <SimulatorApp client:visible defaultAmount={10000000} defaultRate={8} defaultYears={5} currency="CLP" />
 
   <section class="mt-10 mb-8">
     <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en Chile</h2>

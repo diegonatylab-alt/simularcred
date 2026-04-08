@@ -1,6 +1,6 @@
 ---
 import LandingLayout from '../../layouts/LandingLayout.astro';
-import Calculator from '../../components/Calculator';
+import SimulatorApp from '../../components/SimulatorApp';
 import FAQ from '../../components/FAQ.astro';
 import { generateCombos } from '../../lib/landing-combos';
 
@@ -35,7 +35,7 @@ const faqs = [
     <strong>Tasas de referencia Colombia 2024:</strong> Hipotecario (VIS) 10–14% • Personal 18–32% • Microcrédito 30–38%
   </div>
 
-  <Calculator client:visible defaultAmount={20000000} defaultRate={14} defaultYears={5} currency="COP" />
+  <SimulatorApp client:visible defaultAmount={20000000} defaultRate={14} defaultYears={5} currency="COP" />
 
   <section class="mt-10 mb-8">
     <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en Colombia</h2>

@@ -1,17 +1,11 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
-import Calculator from '../components/Calculator';
-import AmortizationTable from '../components/AmortizationTable';
-import LoanChart from '../components/Chart';
+import SimulatorApp from '../components/SimulatorApp';
 import AdUnit from '../components/AdUnit.astro';
 import FAQ from '../components/FAQ.astro';
 import { generateCombos } from '../lib/landing-combos';
-import { calculateFrench, calculateGerman } from '../lib/amortization';
 
 const popularCombos = generateCombos().slice(0, 12);
-
-const defaultFrench = calculateFrench({ principal: 100000, annualRate: 12, termMonths: 60 });
-const defaultGerman = calculateGerman({ principal: 100000, annualRate: 12, termMonths: 60 });
 
 const schema = {
   '@context': 'https://schema.org',
@@ -64,29 +58,12 @@ const faqs = [
     </p>
   </section>
 
-  <!-- Calculator Island -->
+  <!-- Simulator App Island (Calculator + Chart + Table with shared state) -->
   <section class="mb-10">
-    <Calculator client:visible defaultAmount={100000} defaultRate={12} defaultYears={5} currency="MXN" />
+    <SimulatorApp client:visible defaultAmount={100000} defaultRate={12} defaultYears={5} currency="MXN" />
   </section>
 
   <AdUnit slot="top-ad" format="horizontal" />
-
-  <!-- Chart Island -->
-  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-    <h2 class="text-xl font-bold text-primary-800 mb-4">Evolución del Préstamo</h2>
-    <LoanChart
-      client:visible
-      frenchSchedule={defaultFrench.schedule}
-      germanSchedule={defaultGerman.schedule}
-      currency="MXN"
-    />
-  </section>
-
-  <!-- Amortization Table Island -->
-  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-    <h2 class="text-xl font-bold text-primary-800 mb-4">Tabla de Amortización (Sistema Francés)</h2>
-    <AmortizationTable client:visible schedule={defaultFrench.schedule} currency="MXN" />
-  </section>
 
   <AdUnit slot="mid-ad" format="rectangle" />
 

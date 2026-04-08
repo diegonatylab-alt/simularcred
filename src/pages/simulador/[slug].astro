@@ -1,8 +1,6 @@
 ---
 import LandingLayout from '../../layouts/LandingLayout.astro';
-import Calculator from '../../components/Calculator';
-import AmortizationTable from '../../components/AmortizationTable';
-import LoanChart from '../../components/Chart';
+import SimulatorApp from '../../components/SimulatorApp';
 import AdUnit from '../../components/AdUnit.astro';
 import FAQ from '../../components/FAQ.astro';
 import { generateCombos } from '../../lib/landing-combos';
@@ -88,10 +86,10 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
 
   <AdUnit slot="top-ad" format="horizontal" />
 
-  <!-- Interactive Calculator -->
+  <!-- Interactive Calculator with Chart and Table -->
   <section class="mb-10">
     <h2 class="text-xl font-bold text-primary-800 mb-4">Personaliza tu Simulación</h2>
-    <Calculator
+    <SimulatorApp
       client:visible
       defaultAmount={amount}
       defaultRate={rate}
@@ -100,29 +98,7 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
     />
   </section>
 
-  <!-- Chart -->
-  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-    <h2 class="text-xl font-bold text-primary-800 mb-4">Evolución del Préstamo</h2>
-    <LoanChart
-      client:visible
-      frenchSchedule={french.schedule}
-      germanSchedule={german.schedule}
-      currency={currency}
-    />
-  </section>
-
   <AdUnit slot="mid-ad" format="rectangle" />
-
-  <!-- Amortization Tables -->
-  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-    <h2 class="text-xl font-bold text-primary-800 mb-4">Tabla Amortización — Sistema Francés</h2>
-    <AmortizationTable client:visible schedule={french.schedule} currency={currency} />
-  </section>
-
-  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-    <h2 class="text-xl font-bold text-green-800 mb-4">Tabla Amortización — Sistema Alemán</h2>
-    <AmortizationTable client:visible schedule={german.schedule} currency={currency} />
-  </section>
 
   <AdUnit slot="bottom-ad" format="horizontal" />
 
