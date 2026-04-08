@@ -6,12 +6,12 @@ import LoanChart from '../components/Chart';
 import AdUnit from '../components/AdUnit.astro';
 import FAQ from '../components/FAQ.astro';
 import { generateCombos } from '../lib/landing-combos';
-import { calculateFrench } from '../lib/amortization';
+import { calculateFrench, calculateGerman } from '../lib/amortization';
 
 const popularCombos = generateCombos().slice(0, 12);
 
 const defaultFrench = calculateFrench({ principal: 100000, annualRate: 12, termMonths: 60 });
-const defaultGerman = calculateFrench({ principal: 100000, annualRate: 12, termMonths: 60 });
+const defaultGerman = calculateGerman({ principal: 100000, annualRate: 12, termMonths: 60 });
 
 const schema = {
   '@context': 'https://schema.org',
