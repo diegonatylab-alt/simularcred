@@ -1,0 +1,52 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Calculator from '../../components/Calculator';
+import FAQ from '../../components/FAQ.astro';
+import { generateCombos } from '../../lib/landing-combos';
+
+const copCombos = generateCombos().filter((c) => c.currency === 'COP').slice(0, 8);
+
+const faqs = [
+  {
+    question: '¿Cuál es la tasa de usura en Colombia?',
+    answer: 'La Superintendencia Financiera de Colombia fija la tasa de usura cada trimestre. En 2024 se ubica alrededor del 32–38% efectivo anual para créditos de consumo.',
+  },
+  {
+    question: '¿Qué es la tasa EA en Colombia?',
+    answer: 'La tasa EA (Efectiva Anual) es el estándar en Colombia para expresar tasas de interés, incluyendo la capitalización de intereses.',
+  },
+];
+---
+
+<LandingLayout
+  title="Simulador de Crédito Colombia (COP) | SimularCred"
+  description="Calcula préstamos en pesos colombianos (COP). Tabla de amortización y cuotas para créditos en Colombia."
+  canonical="https://simuladorcredito.lat/paises/colombia"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Países' },
+    { label: 'Colombia' },
+  ]}
+>
+  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">🇨🇴 Simulador de Crédito en Colombia</h1>
+  <p class="text-lg text-gray-600 mb-8">Calcula préstamos en pesos colombianos (COP) con las tasas del mercado colombiano.</p>
+
+  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-8 text-sm text-yellow-800">
+    <strong>Tasas de referencia Colombia 2024:</strong> Hipotecario (VIS) 10–14% • Personal 18–32% • Microcrédito 30–38%
+  </div>
+
+  <Calculator client:visible defaultAmount={20000000} defaultRate={14} defaultYears={5} currency="COP" />
+
+  <section class="mt-10 mb-8">
+    <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en Colombia</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {copCombos.map((c) => (
+        <a href={`/simulador/${c.slug}`} class="bg-white border rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
+          <span class="font-semibold text-primary-800">{c.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+</LandingLayout>

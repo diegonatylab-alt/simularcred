@@ -1,0 +1,52 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Calculator from '../../components/Calculator';
+import FAQ from '../../components/FAQ.astro';
+import { generateCombos } from '../../lib/landing-combos';
+
+const penCombos = generateCombos().filter((c) => c.currency === 'PEN').slice(0, 8);
+
+const faqs = [
+  {
+    question: '¿Qué es la TCEA en Perú?',
+    answer: 'La Tasa de Costo Efectivo Anual (TCEA) incluye todos los costos del crédito: tasa nominal, comisiones, portes y seguros. Es el indicador regulado por la SBS.',
+  },
+  {
+    question: '¿Cuáles son las tasas para créditos hipotecarios en Perú?',
+    answer: 'En 2024, las tasas para créditos hipotecarios en soles (PEN) se ubican entre 8% y 14% anual, dependiendo del banco y el perfil del solicitante.',
+  },
+];
+---
+
+<LandingLayout
+  title="Simulador de Crédito Perú (PEN) | SimularCred"
+  description="Calcula préstamos en soles peruanos (PEN). Tabla de amortización y cuotas para créditos en Perú."
+  canonical="https://simuladorcredito.lat/paises/peru"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Países' },
+    { label: 'Perú' },
+  ]}
+>
+  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">🇵🇪 Simulador de Crédito en Perú</h1>
+  <p class="text-lg text-gray-600 mb-8">Calcula préstamos en soles peruanos (PEN) con las tasas del mercado peruano.</p>
+
+  <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-8 text-sm text-orange-800">
+    <strong>Tasas de referencia Perú 2024:</strong> Hipotecario 8–14% • Personal 15–40% • Consumo 20–50%
+  </div>
+
+  <Calculator client:visible defaultAmount={50000} defaultRate={12} defaultYears={5} currency="PEN" />
+
+  <section class="mt-10 mb-8">
+    <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en Perú</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {penCombos.map((c) => (
+        <a href={`/simulador/${c.slug}`} class="bg-white border rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
+          <span class="font-semibold text-primary-800">{c.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+</LandingLayout>

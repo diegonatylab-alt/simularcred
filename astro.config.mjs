@@ -1,0 +1,19 @@
+import { defineConfig } from 'astro/config';
+import preact from '@astrojs/preact';
+import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
+
+export default defineConfig({
+  output: 'static',
+  site: 'https://simuladorcredito.lat',
+  integrations: [
+    preact({ compat: true }),
+    tailwind(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      customPages: [],
+    }),
+  ],
+});

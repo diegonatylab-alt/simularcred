@@ -1,0 +1,41 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+---
+
+<LandingLayout
+  title="Sobre Nosotros | SimularCred"
+  description="SimularCred es una calculadora de préstamos gratuita para América Latina. Conoce más sobre nuestra misión."
+  canonical="https://simuladorcredito.lat/sobre-nosotros"
+  breadcrumbs={[{ label: 'Inicio', href: '/' }, { label: 'Sobre Nosotros' }]}
+>
+  <article class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-primary-900 mb-6">Sobre Nosotros</h1>
+
+    <p class="text-gray-700 mb-4">
+      <strong>SimularCred</strong> es una herramienta gratuita de simulación de créditos diseñada específicamente para usuarios de América Latina. Nuestro objetivo es hacer la educación financiera más accesible y ayudar a las personas a tomar mejores decisiones de crédito.
+    </p>
+
+    <h2 class="text-xl font-bold text-primary-800 mt-6 mb-3">Nuestra Misión</h2>
+    <p class="text-gray-700 mb-4">
+      Creemos que toda persona debe poder entender claramente cuánto paga de intereses, cómo evoluciona su deuda y qué sistema de amortización le conviene más, antes de firmar cualquier crédito.
+    </p>
+
+    <h2 class="text-xl font-bold text-primary-800 mt-6 mb-3">¿Qué ofrecemos?</h2>
+    <ul class="text-gray-700 space-y-2 mb-4">
+      <li>✅ Simulación en MXN, COP, CLP, PEN, ARS y USD</li>
+      <li>✅ Tabla de amortización francesa y alemana</li>
+      <li>✅ Gráficas de evolución del crédito</li>
+      <li>✅ Guías educativas en español</li>
+      <li>✅ Sin registro, sin costos</li>
+    </ul>
+
+    <h2 class="text-xl font-bold text-primary-800 mt-6 mb-3">Aviso Legal</h2>
+    <p class="text-gray-700 mb-4">
+      SimularCred es una herramienta informativa. Los resultados son estimaciones basadas en las condiciones ingresadas y no constituyen oferta, asesoría financiera ni contrato. Las tasas reales pueden variar según la institución financiera.
+    </p>
+
+    <p class="text-gray-500 text-sm mt-8">
+      Contacto: <a href="mailto:hola@simuladorcredito.lat" class="text-primary-600 underline">hola@simuladorcredito.lat</a>
+    </p>
+  </article>
+</LandingLayout>

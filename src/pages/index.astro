@@ -1,0 +1,148 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import Calculator from '../components/Calculator';
+import AmortizationTable from '../components/AmortizationTable';
+import LoanChart from '../components/Chart';
+import AdUnit from '../components/AdUnit.astro';
+import FAQ from '../components/FAQ.astro';
+import { generateCombos } from '../lib/landing-combos';
+import { calculateFrench } from '../lib/amortization';
+
+const popularCombos = generateCombos().slice(0, 12);
+
+const defaultFrench = calculateFrench({ principal: 100000, annualRate: 12, termMonths: 60 });
+const defaultGerman = calculateFrench({ principal: 100000, annualRate: 12, termMonths: 60 });
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Simulador de Crédito LATAM',
+  url: 'https://simuladorcredito.lat',
+  description: 'Calculadora de préstamos y simulador de crédito para América Latina con amortización francesa y alemana.',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const faqs = [
+  {
+    question: '¿Qué es la amortización francesa?',
+    answer: 'La amortización francesa es un sistema en el que la cuota mensual es fija durante toda la vida del préstamo. Al inicio se paga más interés y al final más capital.',
+  },
+  {
+    question: '¿Qué es la amortización alemana?',
+    answer: 'En la amortización alemana, el capital que se paga cada mes es fijo, pero la cuota total varía porque los intereses disminuyen conforme se reduce el saldo.',
+  },
+  {
+    question: '¿Cuál sistema de amortización conviene más?',
+    answer: 'Depende de tu situación. El sistema francés ofrece cuotas fijas predecibles. El sistema alemán paga menos intereses totales, pero las primeras cuotas son más altas.',
+  },
+  {
+    question: '¿Para qué países sirve esta calculadora?',
+    answer: 'SimularCred está diseñado para México (MXN), Colombia (COP), Chile (CLP), Perú (PEN), Argentina (ARS) y también funciona con dólares estadounidenses (USD).',
+  },
+  {
+    question: '¿Es gratuita la calculadora?',
+    answer: 'Sí, la calculadora es completamente gratuita. Solo necesitas ingresar el monto, la tasa de interés y el plazo para obtener tu tabla de amortización al instante.',
+  },
+];
+---
+
+<LandingLayout
+  title="Simulador de Crédito — Calculadora de Préstamos LATAM | SimularCred"
+  description="Simula préstamos en México, Colombia, Chile, Perú y Argentina. Calcula cuotas, tabla de amortización francesa y alemana. Gratis y sin registro."
+  canonical="https://simuladorcredito.lat/"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="text-center py-12 md:py-16">
+    <h1 class="text-3xl md:text-5xl font-extrabold text-primary-900 mb-4 leading-tight">
+      Simulador de Crédito —<br class="hidden md:block" /> Calculadora de Préstamos LATAM
+    </h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+      Calcula tu cuota mensual, tabla de amortización y costo total del crédito en MXN, COP, CLP, PEN, ARS y USD. Sistemas francés y alemán.
+    </p>
+  </section>
+
+  <!-- Calculator Island -->
+  <section class="mb-10">
+    <Calculator client:visible defaultAmount={100000} defaultRate={12} defaultYears={5} currency="MXN" />
+  </section>
+
+  <AdUnit slot="top-ad" format="horizontal" />
+
+  <!-- Chart Island -->
+  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+    <h2 class="text-xl font-bold text-primary-800 mb-4">Evolución del Préstamo</h2>
+    <LoanChart
+      client:visible
+      frenchSchedule={defaultFrench.schedule}
+      germanSchedule={defaultGerman.schedule}
+      currency="MXN"
+    />
+  </section>
+
+  <!-- Amortization Table Island -->
+  <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+    <h2 class="text-xl font-bold text-primary-800 mb-4">Tabla de Amortización (Sistema Francés)</h2>
+    <AmortizationTable client:visible schedule={defaultFrench.schedule} currency="MXN" />
+  </section>
+
+  <AdUnit slot="mid-ad" format="rectangle" />
+
+  <!-- Popular Simulations -->
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-6">Simulaciones Populares</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {popularCombos.map((combo) => (
+        <a
+          href={`/simulador/${combo.slug}`}
+          class="block bg-white border border-gray-200 rounded-xl p-4 hover:border-primary-400 hover:shadow-md transition-all"
+        >
+          <p class="font-semibold text-primary-800 text-sm mb-1">{combo.title}</p>
+          <p class="text-xs text-gray-500">{combo.description.slice(0, 80)}…</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Guides Section -->
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-6">Guías de Amortización</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {[
+        { href: '/guias/sistema-frances', title: 'Sistema Francés', desc: 'Cuota fija durante todo el plazo. Ideal para planificación financiera.' },
+        { href: '/guias/sistema-aleman', title: 'Sistema Alemán', desc: 'Capital fijo, intereses decrecientes. Menor costo total.' },
+        { href: '/guias/como-calcular-cuota', title: 'Cómo Calcular tu Cuota', desc: 'Aprende la fórmula matemática paso a paso.' },
+        { href: '/guias/comparar-creditos', title: 'Comparar Créditos', desc: 'Cómo elegir entre distintas ofertas de crédito.' },
+      ].map((g) => (
+        <a href={g.href} class="bg-primary-50 border border-primary-100 rounded-xl p-5 hover:bg-primary-100 transition-colors">
+          <h3 class="font-bold text-primary-800 mb-2">{g.title}</h3>
+          <p class="text-sm text-gray-600">{g.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Countries Section -->
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold text-primary-800 mb-6">Por País</h2>
+    <div class="flex flex-wrap gap-3">
+      {[
+        { href: '/paises/mexico', label: '🇲🇽 México' },
+        { href: '/paises/colombia', label: '🇨🇴 Colombia' },
+        { href: '/paises/argentina', label: '🇦🇷 Argentina' },
+        { href: '/paises/chile', label: '🇨🇱 Chile' },
+        { href: '/paises/peru', label: '🇵🇪 Perú' },
+      ].map((p) => (
+        <a href={p.href} class="px-5 py-2.5 bg-white border border-gray-200 rounded-full font-medium hover:border-primary-400 hover:text-primary-700 transition-colors">
+          {p.label}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <AdUnit slot="bottom-ad" format="horizontal" />
+
+  <FAQ items={faqs} />
+</LandingLayout>

@@ -1,0 +1,40 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    ...(item.href ? { item: `https://simuladorcredito.lat${item.href}` } : {}),
+  })),
+};
+---
+
+<nav aria-label="Migas de pan" class="text-sm text-gray-500 mb-4">
+  <ol class="flex flex-wrap items-center gap-1">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-1">
+        {i > 0 && <span>/</span>}
+        {item.href ? (
+          <a href={item.href} class="hover:text-primary-700 transition-colors">{item.label}</a>
+        ) : (
+          <span class="text-gray-700 font-medium">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

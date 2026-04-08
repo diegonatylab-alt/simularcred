@@ -1,0 +1,105 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Calculator from '../../components/Calculator';
+import FAQ from '../../components/FAQ.astro';
+import AdUnit from '../../components/AdUnit.astro';
+
+const faqs = [
+  {
+    question: '¿Qué ventajas tiene el sistema francés?',
+    answer: 'Cuota fija, fácil planificación del presupuesto, ampliamente disponible en bancos de toda América Latina.',
+  },
+  {
+    question: '¿En qué países es más común el sistema francés?',
+    answer: 'Es el sistema más extendido en México, Colombia, Chile, Perú y Argentina. La mayoría de créditos hipotecarios y personales lo usan.',
+  },
+  {
+    question: '¿Cómo se calcula la cuota en el sistema francés?',
+    answer: 'Con la fórmula: M = P × [r(1+r)^n] / [(1+r)^n - 1], donde P es el capital, r la tasa mensual y n el número de cuotas.',
+  },
+];
+---
+
+<LandingLayout
+  title="Sistema de Amortización Francés: Guía Completa | SimularCred"
+  description="Aprende qué es el sistema de amortización francés, cómo funciona, su fórmula y cuándo conviene usarlo en México, Colombia y otros países LATAM."
+  canonical="https://simuladorcredito.lat/guias/sistema-frances"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Guías', href: '/guias/sistema-frances' },
+    { label: 'Sistema Francés' },
+  ]}
+>
+  <article class="prose prose-blue max-w-4xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-primary-900 mb-4">Sistema de Amortización Francés</h1>
+
+    <p class="text-lg text-gray-600 mb-6">
+      El sistema de amortización francés es el método de pago de préstamos más utilizado en América Latina. Se caracteriza por cuotas mensuales <strong>fijas</strong> durante toda la vida del crédito.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">¿Cómo funciona?</h2>
+    <p class="text-gray-700 mb-4">
+      En cada cuota mensual se pagan dos componentes: <strong>capital</strong> (parte del monto prestado) e <strong>intereses</strong> (costo del dinero prestado). La diferencia con otros sistemas es que la suma de estos dos componentes siempre es la misma.
+    </p>
+    <p class="text-gray-700 mb-4">
+      Al principio del préstamo, la mayor parte de la cuota corresponde a intereses. Conforme avanza el tiempo, la proporción de capital crece y la de intereses disminuye. Esto se denomina <em>perfil de amortización creciente del capital</em>.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">La Fórmula Matemática</h2>
+    <div class="bg-primary-50 border-l-4 border-primary-600 p-4 rounded-r-lg mb-4">
+      <code class="text-primary-900 font-mono text-base">M = P × [r(1+r)^n] / [(1+r)^n − 1]</code>
+    </div>
+    <ul class="text-gray-700 mb-4 space-y-1">
+      <li><strong>M</strong> = cuota mensual fija</li>
+      <li><strong>P</strong> = capital (monto del préstamo)</li>
+      <li><strong>r</strong> = tasa de interés mensual (tasa anual ÷ 12)</li>
+      <li><strong>n</strong> = número total de cuotas (años × 12)</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Ejemplo Práctico</h2>
+    <p class="text-gray-700 mb-4">
+      Supongamos un préstamo de MXN 200,000 a 15% anual durante 3 años (36 cuotas):
+    </p>
+    <ul class="text-gray-700 mb-4 space-y-1">
+      <li>Tasa mensual: 15% ÷ 12 = 1.25%</li>
+      <li>Cuota mensual fija: aproximadamente MXN 6,934</li>
+      <li>Total pagado en 3 años: MXN 249,624</li>
+      <li>Intereses totales: MXN 49,624</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Ventajas del Sistema Francés</h2>
+    <ul class="text-gray-700 mb-4 space-y-2">
+      <li>✅ <strong>Cuota fija</strong>: facilita la planificación del presupuesto mensual</li>
+      <li>✅ <strong>Ampliamente disponible</strong>: es el estándar en bancos de toda LATAM</li>
+      <li>✅ <strong>Fácil comparación</strong>: puedes comparar créditos solo comparando la cuota</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Desventajas</h2>
+    <ul class="text-gray-700 mb-4 space-y-2">
+      <li>❌ <strong>Mayor costo total</strong>: frente al sistema alemán, se pagan más intereses</li>
+      <li>❌ <strong>Amortización lenta</strong>: en los primeros meses se paga poco capital</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">¿Cuándo elegir el sistema francés?</h2>
+    <p class="text-gray-700 mb-4">
+      Es la mejor opción cuando necesitas certeza sobre el monto exacto a pagar cada mes. Ideal para asalariados, arrendadores y cualquier persona que prefiera estabilidad en sus pagos.
+    </p>
+
+    <h2 class="text-2xl font-bold text-primary-800 mt-8 mb-3">Prueba el Simulador</h2>
+  </article>
+
+  <div class="max-w-4xl mx-auto mt-6 mb-10">
+    <Calculator client:visible currency="MXN" />
+  </div>
+
+  <AdUnit slot="mid" format="horizontal" />
+
+  <div class="max-w-4xl mx-auto">
+    <FAQ items={faqs} />
+    <div class="mt-8 flex flex-wrap gap-4 text-sm">
+      <a href="/guias/sistema-aleman" class="text-primary-700 underline">→ Ver Sistema Alemán</a>
+      <a href="/guias/comparar-creditos" class="text-primary-700 underline">→ Cómo Comparar Créditos</a>
+      <a href="/paises/mexico" class="text-primary-700 underline">→ Créditos en México</a>
+    </div>
+  </div>
+</LandingLayout>
