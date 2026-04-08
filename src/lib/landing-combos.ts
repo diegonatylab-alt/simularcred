@@ -114,7 +114,7 @@ export function generateCombos(): LandingCombo[] {
     }
   }
 
-  if (MAX_COMBOS !== Infinity && combos.length > MAX_COMBOS) {
+  if (Number.isFinite(MAX_COMBOS) && combos.length > MAX_COMBOS) {
     return combos.slice(0, MAX_COMBOS);
   }
   return combos;
