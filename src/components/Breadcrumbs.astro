@@ -22,15 +22,15 @@ const schema = {
 };
 ---
 
-<nav aria-label="Migas de pan" class="text-sm text-gray-500 mb-4">
+<nav aria-label="Migas de pan" class="text-sm text-gray-500 dark:text-gray-400 mb-4">
   <ol class="flex flex-wrap items-center gap-1">
     {items.map((item, i) => (
       <li class="flex items-center gap-1">
         {i > 0 && <span>/</span>}
         {item.href ? (
-          <a href={item.href} class="hover:text-primary-700 transition-colors">{item.label}</a>
+          <a href={item.href} class="hover:text-primary-700 dark:hover:text-primary-400 transition-colors">{item.label}</a>
         ) : (
-          <span class="text-gray-700 font-medium">{item.label}</span>
+          <span class="text-gray-700 dark:text-gray-300 font-medium">{item.label}</span>
         )}
       </li>
     ))}
