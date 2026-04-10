@@ -61,25 +61,25 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
     { label: title },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">{title}</h1>
-  <p class="text-gray-600 mb-8">{description}</p>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-200 mb-2">{title}</h1>
+  <p class="text-gray-600 dark:text-gray-400 mb-8">{description}</p>
 
   <!-- Summary Comparison -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
-      <h2 class="font-bold text-primary-800 mb-4 text-lg">Sistema Francés</h2>
+    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6">
+      <h2 class="font-bold text-primary-800 dark:text-primary-300 mb-4 text-lg">Sistema Francés</h2>
       <dl class="space-y-2 text-sm">
-        <div class="flex justify-between"><dt class="text-gray-600">Cuota mensual:</dt><dd class="font-bold">{fmt(french.monthlyPayment)}</dd></div>
-        <div class="flex justify-between"><dt class="text-gray-600">Total a pagar:</dt><dd class="font-bold">{fmt(french.totalPayment)}</dd></div>
-        <div class="flex justify-between"><dt class="text-gray-600">Total intereses:</dt><dd class="font-bold text-red-600">{fmt(french.totalInterest)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Cuota mensual:</dt><dd class="font-bold dark:text-gray-200">{fmt(french.monthlyPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Total a pagar:</dt><dd class="font-bold dark:text-gray-200">{fmt(french.totalPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Total intereses:</dt><dd class="font-bold text-red-600 dark:text-red-400">{fmt(french.totalInterest)}</dd></div>
       </dl>
     </div>
-    <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
-      <h2 class="font-bold text-green-800 mb-4 text-lg">Sistema Alemán</h2>
+    <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-2xl p-6">
+      <h2 class="font-bold text-green-800 dark:text-green-300 mb-4 text-lg">Sistema Alemán</h2>
       <dl class="space-y-2 text-sm">
-        <div class="flex justify-between"><dt class="text-gray-600">Primera cuota:</dt><dd class="font-bold">{fmt(german.monthlyPayment)}</dd></div>
-        <div class="flex justify-between"><dt class="text-gray-600">Total a pagar:</dt><dd class="font-bold">{fmt(german.totalPayment)}</dd></div>
-        <div class="flex justify-between"><dt class="text-gray-600">Total intereses:</dt><dd class="font-bold text-red-600">{fmt(german.totalInterest)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Primera cuota:</dt><dd class="font-bold dark:text-gray-200">{fmt(german.monthlyPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Total a pagar:</dt><dd class="font-bold dark:text-gray-200">{fmt(german.totalPayment)}</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Total intereses:</dt><dd class="font-bold text-red-600 dark:text-red-400">{fmt(german.totalInterest)}</dd></div>
       </dl>
     </div>
   </div>
@@ -88,7 +88,7 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
 
   <!-- Interactive Calculator with Chart and Table -->
   <section class="mb-10">
-    <h2 class="text-xl font-bold text-primary-800 mb-4">Personaliza tu Simulación</h2>
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-4">Personaliza tu Simulación</h2>
     <SimulatorApp
       client:visible
       defaultAmount={amount}
@@ -104,11 +104,11 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
 
   <!-- Internal Links -->
   <section class="mb-10">
-    <h2 class="text-lg font-bold text-primary-800 mb-4">Guías Relacionadas</h2>
+    <h2 class="text-lg font-bold text-primary-800 dark:text-primary-300 mb-4">Guías Relacionadas</h2>
     <div class="flex flex-wrap gap-3">
-      <a href="/guias/sistema-frances" class="text-sm text-primary-700 underline hover:no-underline">Sistema Francés</a>
-      <a href="/guias/sistema-aleman" class="text-sm text-primary-700 underline hover:no-underline">Sistema Alemán</a>
-      <a href="/guias/comparar-creditos" class="text-sm text-primary-700 underline hover:no-underline">Comparar Créditos</a>
+      <a href="/guias/sistema-frances" class="text-sm text-primary-700 dark:text-primary-400 underline hover:no-underline">Sistema Francés</a>
+      <a href="/guias/sistema-aleman" class="text-sm text-primary-700 dark:text-primary-400 underline hover:no-underline">Sistema Alemán</a>
+      <a href="/guias/comparar-creditos" class="text-sm text-primary-700 dark:text-primary-400 underline hover:no-underline">Comparar Créditos</a>
     </div>
   </section>
 
