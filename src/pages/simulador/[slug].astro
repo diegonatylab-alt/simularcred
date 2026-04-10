@@ -61,13 +61,13 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
     { label: title },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-200 mb-2">{title}</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">{title}</h1>
   <p class="text-gray-600 dark:text-gray-400 mb-8">{description}</p>
 
   <!-- Summary Comparison -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
     <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6">
-      <h2 class="font-bold text-primary-800 dark:text-primary-300 mb-4 text-lg">Sistema Francés</h2>
+      <h2 class="font-bold text-primary-800 dark:text-primary-400 mb-4 text-lg">Sistema Francés</h2>
       <dl class="space-y-2 text-sm">
         <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Cuota mensual:</dt><dd class="font-bold dark:text-gray-200">{fmt(french.monthlyPayment)}</dd></div>
         <div class="flex justify-between"><dt class="text-gray-600 dark:text-gray-400">Total a pagar:</dt><dd class="font-bold dark:text-gray-200">{fmt(french.totalPayment)}</dd></div>
@@ -88,7 +88,7 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
 
   <!-- Interactive Calculator with Chart and Table -->
   <section class="mb-10">
-    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-4">Personaliza tu Simulación</h2>
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-4">Personaliza tu Simulación</h2>
     <SimulatorApp
       client:visible
       defaultAmount={amount}
@@ -104,7 +104,7 @@ const canonicalUrl = `https://simuladorcredito.lat/simulador/${combo.slug}`;
 
   <!-- Internal Links -->
   <section class="mb-10">
-    <h2 class="text-lg font-bold text-primary-800 dark:text-primary-300 mb-4">Guías Relacionadas</h2>
+    <h2 class="text-lg font-bold text-primary-800 dark:text-primary-400 mb-4">Guías Relacionadas</h2>
     <div class="flex flex-wrap gap-3">
       <a href="/guias/sistema-frances" class="text-sm text-primary-700 dark:text-primary-400 underline hover:no-underline">Sistema Francés</a>
       <a href="/guias/sistema-aleman" class="text-sm text-primary-700 dark:text-primary-400 underline hover:no-underline">Sistema Alemán</a>
