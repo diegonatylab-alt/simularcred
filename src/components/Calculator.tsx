@@ -32,7 +32,7 @@ export default function Calculator({
 
   return (
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8">
-      <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-6">Configura tu Préstamo</h2>
+      <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-6">Configura tu Préstamo</h2>
 
       {/* Currency & System */}
       <div class="grid grid-cols-2 gap-4 mb-6">
@@ -132,11 +132,11 @@ export default function Calculator({
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl p-4">
         <div class="text-center">
           <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Cuota {system === 'german' ? 'inicial' : 'mensual'}</p>
-          <p class="text-xl font-bold text-primary-800 dark:text-primary-300">{fmt(result.monthlyPayment)}</p>
+          <p class="text-xl font-bold text-primary-800 dark:text-primary-400">{fmt(result.monthlyPayment)}</p>
         </div>
         <div class="text-center">
           <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Total a Pagar</p>
-          <p class="text-xl font-bold text-primary-800 dark:text-primary-300">{fmt(result.totalPayment)}</p>
+          <p class="text-xl font-bold text-primary-800 dark:text-primary-400">{fmt(result.totalPayment)}</p>
         </div>
         <div class="text-center">
           <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Intereses</p>
