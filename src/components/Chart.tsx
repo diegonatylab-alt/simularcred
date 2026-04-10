@@ -106,11 +106,11 @@ export default function LoanChart({ frenchSchedule, germanSchedule, currency }: 
   return (
     <div>
       <div class="flex items-center gap-3 mb-4">
-        <span class="text-sm font-medium text-gray-700">Sistema:</span>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Sistema:</span>
         <button
           onClick={() => setShowGerman(false)}
           class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            !showGerman ? 'bg-primary-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            !showGerman ? 'bg-primary-700 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           }`}
         >
           Francés
@@ -118,7 +118,7 @@ export default function LoanChart({ frenchSchedule, germanSchedule, currency }: 
         <button
           onClick={() => setShowGerman(true)}
           class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            showGerman ? 'bg-primary-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            showGerman ? 'bg-primary-700 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           }`}
         >
           Alemán
