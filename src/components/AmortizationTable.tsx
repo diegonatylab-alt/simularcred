@@ -31,16 +31,16 @@ export default function AmortizationTable({ schedule, currency }: Props) {
           {rows.map((row) => (
             <tr
               key={row.month}
-              class="even:bg-gray-50 hover:bg-primary-50 transition-colors"
+              class="even:bg-gray-50 dark:even:bg-gray-800/50 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
             >
               <td class="px-3 py-2 text-left font-medium">{row.month}</td>
               <td class="px-3 py-2 text-right whitespace-nowrap">{row.date}</td>
               <td class="px-3 py-2 text-right">{fmt(row.payment)}</td>
-              <td class="px-3 py-2 text-right text-blue-700">{fmt(row.principalPart)}</td>
-              <td class="px-3 py-2 text-right text-red-600">{fmt(row.interestPart)}</td>
+              <td class="px-3 py-2 text-right text-blue-700 dark:text-blue-400">{fmt(row.principalPart)}</td>
+              <td class="px-3 py-2 text-right text-red-600 dark:text-red-400">{fmt(row.interestPart)}</td>
               <td class="px-3 py-2 text-right">{fmt(row.balance)}</td>
-              <td class="px-3 py-2 text-right text-red-500">{fmt(row.cumulativeInterest)}</td>
-              <td class="px-3 py-2 text-right text-blue-500">{fmt(row.cumulativePrincipal)}</td>
+              <td class="px-3 py-2 text-right text-red-500 dark:text-red-400">{fmt(row.cumulativeInterest)}</td>
+              <td class="px-3 py-2 text-right text-blue-500 dark:text-blue-400">{fmt(row.cumulativePrincipal)}</td>
             </tr>
           ))}
         </tbody>
@@ -51,17 +51,17 @@ export default function AmortizationTable({ schedule, currency }: Props) {
           <button
             disabled={page === 1}
             onClick={() => setPage((p) => p - 1)}
-            class="px-3 py-1 rounded border disabled:opacity-40 hover:bg-primary-50"
+            class="px-3 py-1 rounded border dark:border-gray-600 disabled:opacity-40 hover:bg-primary-50 dark:hover:bg-primary-900/20"
           >
             ← Anterior
           </button>
-          <span class="text-sm text-gray-600">
+          <span class="text-sm text-gray-600 dark:text-gray-400">
             Página {page} de {totalPages}
           </span>
           <button
             disabled={page === totalPages}
             onClick={() => setPage((p) => p + 1)}
-            class="px-3 py-1 rounded border disabled:opacity-40 hover:bg-primary-50"
+            class="px-3 py-1 rounded border dark:border-gray-600 disabled:opacity-40 hover:bg-primary-50 dark:hover:bg-primary-900/20"
           >
             Siguiente →
           </button>
