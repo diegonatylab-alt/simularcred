@@ -28,21 +28,21 @@ const faqs = [
     { label: 'Perú' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">🇵🇪 Simulador de Crédito en Perú</h1>
-  <p class="text-lg text-gray-600 mb-8">Calcula préstamos en soles peruanos (PEN) con las tasas del mercado peruano.</p>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-200 mb-2">🇵🇪 Simulador de Crédito en Perú</h1>
+  <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en soles peruanos (PEN) con las tasas del mercado peruano.</p>
 
-  <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-8 text-sm text-orange-800">
+  <div class="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl p-4 mb-8 text-sm text-orange-800 dark:text-orange-300">
     <strong>Tasas de referencia Perú 2024:</strong> Hipotecario 8–14% • Personal 15–40% • Consumo 20–50%
   </div>
 
   <SimulatorApp client:visible defaultAmount={50000} defaultRate={12} defaultYears={5} currency="PEN" />
 
   <section class="mt-10 mb-8">
-    <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en Perú</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-4">Simulaciones Populares en Perú</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {penCombos.map((c) => (
-        <a href={`/simulador/${c.slug}`} class="bg-white border rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
-          <span class="font-semibold text-primary-800">{c.title}</span>
+        <a href={`/simulador/${c.slug}`} class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
+          <span class="font-semibold text-primary-800 dark:text-primary-300">{c.title}</span>
         </a>
       ))}
     </div>
