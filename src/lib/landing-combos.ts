@@ -11,7 +11,7 @@ export interface LandingCombo {
 
 // MAX_COMBOS: Set to ~150 for dev builds. For production with ~5000 combos,
 // set MAX_COMBOS = Infinity or remove the limit.
-export const MAX_COMBOS = 150;
+export const MAX_COMBOS = Infinity;
 
 interface CurrencyConfig {
   currency: string;
