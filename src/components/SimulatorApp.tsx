@@ -41,16 +41,16 @@ export default function SimulatorApp({
   return (
     <div>
       {/* Calculator Inputs */}
-      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-        <h2 class="text-xl font-bold text-primary-800 mb-6">Configura tu Préstamo</h2>
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
+        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-6">Configura tu Préstamo</h2>
 
         {/* Currency */}
         <div class="mb-5">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Moneda</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Moneda</label>
           <select
             value={currency}
             onChange={(e) => setCurrency((e.target as HTMLSelectElement).value)}
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             {CURRENCIES.map((c) => (
               <option key={c} value={c}>{c}</option>
@@ -60,8 +60,8 @@ export default function SimulatorApp({
 
         {/* Amount */}
         <div class="mb-5">
-          <label class="block text-sm font-medium text-gray-700 mb-1">
-            Monto del Préstamo: <span class="font-bold text-primary-700">{fmt(amount)}</span>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Monto del Préstamo: <span class="font-bold text-primary-700 dark:text-primary-400">{fmt(amount)}</span>
           </label>
           <input
             type="range"
@@ -70,20 +70,20 @@ export default function SimulatorApp({
             step={1000}
             value={amount}
             onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
-            class="w-full h-2 bg-primary-100 rounded-lg appearance-none cursor-pointer accent-primary-700"
+            class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
           />
           <input
             type="number"
             value={amount}
             onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
-            class="mt-2 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
         </div>
 
         {/* Rate */}
         <div class="mb-5">
-          <label class="block text-sm font-medium text-gray-700 mb-1">
-            Tasa Anual: <span class="font-bold text-primary-700">{rate}%</span>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Tasa Anual: <span class="font-bold text-primary-700 dark:text-primary-400">{rate}%</span>
           </label>
           <input
             type="range"
@@ -92,21 +92,21 @@ export default function SimulatorApp({
             step={0.5}
             value={rate}
             onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
-            class="w-full h-2 bg-primary-100 rounded-lg appearance-none cursor-pointer accent-primary-700"
+            class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
           />
           <input
             type="number"
             value={rate}
             step={0.1}
             onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
-            class="mt-2 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
         </div>
 
         {/* Years */}
         <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-1">
-            Plazo: <span class="font-bold text-primary-700">{years} año{years !== 1 ? 's' : ''}</span>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Plazo: <span class="font-bold text-primary-700 dark:text-primary-400">{years} año{years !== 1 ? 's' : ''}</span>
           </label>
           <input
             type="range"
@@ -115,49 +115,49 @@ export default function SimulatorApp({
             step={1}
             value={years}
             onInput={(e) => setYears(Number((e.target as HTMLInputElement).value))}
-            class="w-full h-2 bg-primary-100 rounded-lg appearance-none cursor-pointer accent-primary-700"
+            class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
           />
           <input
             type="number"
             value={years}
             onInput={(e) => setYears(Number((e.target as HTMLInputElement).value))}
-            class="mt-2 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
         </div>
 
         {/* Results Comparison */}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-            <h3 class="font-bold text-primary-800 mb-3 text-sm">Sistema Francés (cuota fija)</h3>
+          <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
+            <h3 class="font-bold text-primary-800 dark:text-primary-300 mb-3 text-sm">Sistema Francés (cuota fija)</h3>
             <div class="space-y-1 text-sm">
               <div class="flex justify-between">
-                <span class="text-gray-600">Cuota mensual:</span>
-                <span class="font-bold text-primary-800">{fmt(french.monthlyPayment)}</span>
+                <span class="text-gray-600 dark:text-gray-400">Cuota mensual:</span>
+                <span class="font-bold text-primary-800 dark:text-primary-300">{fmt(french.monthlyPayment)}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-gray-600">Total a pagar:</span>
-                <span class="font-bold">{fmt(french.totalPayment)}</span>
+                <span class="text-gray-600 dark:text-gray-400">Total a pagar:</span>
+                <span class="font-bold dark:text-gray-200">{fmt(french.totalPayment)}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-gray-600">Total intereses:</span>
-                <span class="font-bold text-red-600">{fmt(french.totalInterest)}</span>
+                <span class="text-gray-600 dark:text-gray-400">Total intereses:</span>
+                <span class="font-bold text-red-600 dark:text-red-400">{fmt(french.totalInterest)}</span>
               </div>
             </div>
           </div>
-          <div class="bg-green-50 border border-green-200 rounded-xl p-4">
-            <h3 class="font-bold text-green-800 mb-3 text-sm">Sistema Alemán (capital fijo)</h3>
+          <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4">
+            <h3 class="font-bold text-green-800 dark:text-green-300 mb-3 text-sm">Sistema Alemán (capital fijo)</h3>
             <div class="space-y-1 text-sm">
               <div class="flex justify-between">
-                <span class="text-gray-600">Primera cuota:</span>
-                <span class="font-bold text-green-800">{fmt(german.monthlyPayment)}</span>
+                <span class="text-gray-600 dark:text-gray-400">Primera cuota:</span>
+                <span class="font-bold text-green-800 dark:text-green-300">{fmt(german.monthlyPayment)}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-gray-600">Total a pagar:</span>
-                <span class="font-bold">{fmt(german.totalPayment)}</span>
+                <span class="text-gray-600 dark:text-gray-400">Total a pagar:</span>
+                <span class="font-bold dark:text-gray-200">{fmt(german.totalPayment)}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-gray-600">Total intereses:</span>
-                <span class="font-bold text-red-600">{fmt(german.totalInterest)}</span>
+                <span class="text-gray-600 dark:text-gray-400">Total intereses:</span>
+                <span class="font-bold text-red-600 dark:text-red-400">{fmt(german.totalInterest)}</span>
               </div>
             </div>
           </div>
@@ -165,8 +165,8 @@ export default function SimulatorApp({
       </div>
 
       {/* Chart */}
-      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
-        <h2 class="text-xl font-bold text-primary-800 mb-4">Evolución del Préstamo</h2>
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
+        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-4">Evolución del Préstamo</h2>
         <LoanChart
           frenchSchedule={french.schedule}
           germanSchedule={german.schedule}
@@ -175,16 +175,16 @@ export default function SimulatorApp({
       </div>
 
       {/* Amortization Table */}
-      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <h2 class="text-xl font-bold text-primary-800">Tabla de Amortización</h2>
+          <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300">Tabla de Amortización</h2>
           <div class="flex gap-2">
             <button
               onClick={() => setTableSystem('french')}
               class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 tableSystem === 'french'
                   ? 'bg-primary-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Francés
@@ -194,7 +194,7 @@ export default function SimulatorApp({
               class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 tableSystem === 'german'
                   ? 'bg-primary-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Alemán
