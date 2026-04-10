@@ -1,130 +1,210 @@
-import { useEffect, useRef, useState } from 'preact/hooks';
-import type { AmortizationRow } from '../lib/amortization';
+import { useState, useMemo } from 'preact/hooks';
+import { calculateFrench, calculateGerman } from '../lib/amortization';
 import { formatCurrency } from '../lib/formatters';
+import LoanChart from './Chart';
+import AmortizationTable from './AmortizationTable';
 
 interface Props {
-  frenchSchedule: AmortizationRow[];
-  germanSchedule: AmortizationRow[];
-  currency: string;
+  defaultAmount?: number;
+  defaultRate?: number;
+  defaultYears?: number;
+  currency?: string;
+  maxAmount?: number;
 }
 
-export default function LoanChart({ frenchSchedule, germanSchedule, currency }: Props) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const chartRef = useRef<any>(null);
-  const [showGerman, setShowGerman] = useState(false);
+const CURRENCIES = ['MXN', 'COP', 'CLP', 'PEN', 'ARS', 'USD'];
+
+export default function SimulatorApp({
+  defaultAmount = 100000,
+  defaultRate = 12,
+  defaultYears = 5,
+  currency: defaultCurrency = 'MXN',
+  maxAmount = 10000000,
+}: Props) {
+  const [amount, setAmount] = useState(defaultAmount);
+  const [rate, setRate] = useState(defaultRate);
+  const [years, setYears] = useState(defaultYears);
+  const [currency, setCurrency] = useState(defaultCurrency);
+  const [tableSystem, setTableSystem] = useState<'french' | 'german'>('french');
+
+  const french = useMemo(
+    () => calculateFrench({ principal: amount, annualRate: rate, termMonths: years * 12 }),
+    [amount, rate, years],
+  );
+
+  const german = useMemo(
+    () => calculateGerman({ principal: amount, annualRate: rate, termMonths: years * 12 }),
+    [amount, rate, years],
+  );
+
   const fmt = (n: number) => formatCurrency(n, currency);
-
-  useEffect(() => {
-    let destroyed = false;
-
-    async function initChart() {
-      const { Chart, registerables } = await import('chart.js');
-      Chart.register(...registerables);
-
-      if (destroyed || !canvasRef.current) return;
-
-      const schedule = showGerman ? germanSchedule : frenchSchedule;
-      const labels = schedule.map((r) => `Mes ${r.month}`);
-      const balanceData = schedule.map((r) => r.balance);
-      const cumInterestData = schedule.map((r) => r.cumulativeInterest);
-      const cumPrincipalData = schedule.map((r) => r.cumulativePrincipal);
-
-      if (chartRef.current) {
-        chartRef.current.destroy();
-        chartRef.current = null;
-      }
-
-      chartRef.current = new Chart(canvasRef.current, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Saldo Restante',
-              data: balanceData,
-              borderColor: '#1e40af',
-              backgroundColor: 'rgba(30,64,175,0.08)',
-              fill: true,
-              tension: 0.4,
-              pointRadius: 0,
-            },
-            {
-              label: 'Interés Acumulado',
-              data: cumInterestData,
-              borderColor: '#ef4444',
-              backgroundColor: 'rgba(239,68,68,0.06)',
-              fill: true,
-              tension: 0.4,
-              pointRadius: 0,
-            },
-            {
-              label: 'Capital Amortizado',
-              data: cumPrincipalData,
-              borderColor: '#16a34a',
-              backgroundColor: 'rgba(22,163,74,0.06)',
-              fill: true,
-              tension: 0.4,
-              pointRadius: 0,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          interaction: { mode: 'index', intersect: false },
-          plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-              callbacks: {
-                label: (ctx) => ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)}`,
-              },
-            },
-          },
-          scales: {
-            y: {
-              ticks: {
-                callback: (value) => fmt(Number(value)),
-              },
-            },
-          },
-        },
-      });
-    }
-
-    initChart();
-
-    return () => {
-      destroyed = true;
-      if (chartRef.current) {
-        chartRef.current.destroy();
-        chartRef.current = null;
-      }
-    };
-  }, [showGerman, frenchSchedule, germanSchedule, currency]);
+  const activeSchedule = tableSystem === 'french' ? french.schedule : german.schedule;
 
   return (
     <div>
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Sistema:</span>
-        <button
-          onClick={() => setShowGerman(false)}
-          class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            !showGerman ? 'bg-primary-700 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Francés
-        </button>
-        <button
-          onClick={() => setShowGerman(true)}
-          class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            showGerman ? 'bg-primary-700 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-        >
-          Alemán
-        </button>
+      {/* Calculator Inputs */}
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
+        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-6">Configura tu Préstamo</h2>
+
+        {/* Currency */}
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Moneda</label>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency((e.target as HTMLSelectElement).value)}
+            class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          >
+            {CURRENCIES.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Amount */}
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Monto del Préstamo: <span class="font-bold text-primary-700 dark:text-primary-400">{fmt(amount)}</span>
+          </label>
+          <input
+            type="range"
+            min={1000}
+            max={maxAmount}
+            step={1000}
+            value={amount}
+            onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
+            class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
+          />
+          <input
+            type="number"
+            value={amount}
+            onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
+            class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          />
+        </div>
+
+        {/* Rate */}
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Tasa Anual: <span class="font-bold text-primary-700 dark:text-primary-400">{rate}%</span>
+          </label>
+          <input
+            type="range"
+            min={1}
+            max={120}
+            step={0.5}
+            value={rate}
+            onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
+            class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
+          />
+          <input
+            type="number"
+            value={rate}
+            step={0.1}
+            onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
+            class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          />
+        </div>
+
+        {/* Years */}
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Plazo: <span class="font-bold text-primary-700 dark:text-primary-400">{years} año{years !== 1 ? 's' : ''}</span>
+          </label>
+          <input
+            type="range"
+            min={1}
+            max={30}
+            step={1}
+            value={years}
+            onInput={(e) => setYears(Number((e.target as HTMLInputElement).value))}
+            class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
+          />
+          <input
+            type="number"
+            value={years}
+            onInput={(e) => setYears(Number((e.target as HTMLInputElement).value))}
+            class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          />
+        </div>
+
+        {/* Results Comparison */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
+            <h3 class="font-bold text-primary-800 dark:text-primary-400 mb-3 text-sm">Sistema Francés (cuota fija)</h3>
+            <div class="space-y-1 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Cuota mensual:</span>
+                <span class="font-bold text-primary-800 dark:text-primary-400">{fmt(french.monthlyPayment)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Total a pagar:</span>
+                <span class="font-bold dark:text-gray-200">{fmt(french.totalPayment)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Total intereses:</span>
+                <span class="font-bold text-red-600 dark:text-red-400">{fmt(french.totalInterest)}</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4">
+            <h3 class="font-bold text-green-800 dark:text-green-300 mb-3 text-sm">Sistema Alemán (capital fijo)</h3>
+            <div class="space-y-1 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Primera cuota:</span>
+                <span class="font-bold text-green-800 dark:text-green-300">{fmt(german.monthlyPayment)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Total a pagar:</span>
+                <span class="font-bold dark:text-gray-200">{fmt(german.totalPayment)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Total intereses:</span>
+                <span class="font-bold text-red-600 dark:text-red-400">{fmt(german.totalInterest)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <canvas ref={canvasRef} />
+
+      {/* Chart */}
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
+        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-4">Evolución del Préstamo</h2>
+        <LoanChart
+          frenchSchedule={french.schedule}
+          germanSchedule={german.schedule}
+          currency={currency}
+        />
+      </div>
+
+      {/* Amortization Table */}
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400">Tabla de Amortización</h2>
+          <div class="flex gap-2">
+            <button
+              onClick={() => setTableSystem('french')}
+              class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                tableSystem === 'french'
+                  ? 'bg-primary-700 text-white'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              Francés
+            </button>
+            <button
+              onClick={() => setTableSystem('german')}
+              class={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                tableSystem === 'german'
+                  ? 'bg-primary-700 text-white'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              Alemán
+            </button>
+          </div>
+        </div>
+        <AmortizationTable schedule={activeSchedule} currency={currency} />
+      </div>
     </div>
   );
 }
