@@ -1,6 +1,6 @@
 # SimularCred — Simulador de Crédito LATAM
 
-Calculadora de préstamos y simulador de crédito para América Latina. Genera tablas de amortización francesa y alemana para MXN, COP, CLP, PEN, ARS y USD.
+Calculadora interactiva de préstamos y simulador de crédito para América Latina. Genera tablas de amortización francesa y alemana para MXN, COP, CLP, PEN, ARS y USD.
 
 ## Tech Stack
 
