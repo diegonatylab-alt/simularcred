@@ -32,7 +32,7 @@ const faqs = [
     { label: 'México' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-200 mb-2">🇲🇽 Simulador de Crédito en México</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇲🇽 Simulador de Crédito en México</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos mexicanos (MXN) con las tasas referenciales del mercado.</p>
 
   <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-8 text-sm text-amber-800 dark:text-amber-300">
@@ -42,11 +42,11 @@ const faqs = [
   <SimulatorApp client:visible defaultAmount={200000} defaultRate={12} defaultYears={10} currency="MXN" />
 
   <section class="mt-10 mb-8">
-    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-4">Simulaciones Populares en México</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-4">Simulaciones Populares en México</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {mxnCombos.map((c) => (
         <a href={`/simulador/${c.slug}`} class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
-          <span class="font-semibold text-primary-800 dark:text-primary-300">{c.title}</span>
+          <span class="font-semibold text-primary-800 dark:text-primary-400">{c.title}</span>
         </a>
       ))}
     </div>

@@ -28,7 +28,7 @@ const faqs = [
     { label: 'Colombia' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-200 mb-2">🇨🇴 Simulador de Crédito en Colombia</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇨🇴 Simulador de Crédito en Colombia</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos colombianos (COP) con las tasas del mercado colombiano.</p>
 
   <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 mb-8 text-sm text-yellow-800 dark:text-yellow-300">
@@ -38,11 +38,11 @@ const faqs = [
   <SimulatorApp client:visible defaultAmount={20000000} defaultRate={14} defaultYears={5} currency="COP" />
 
   <section class="mt-10 mb-8">
-    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-4">Simulaciones Populares en Colombia</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-4">Simulaciones Populares en Colombia</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {copCombos.map((c) => (
         <a href={`/simulador/${c.slug}`} class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
-          <span class="font-semibold text-primary-800 dark:text-primary-300">{c.title}</span>
+          <span class="font-semibold text-primary-800 dark:text-primary-400">{c.title}</span>
         </a>
       ))}
     </div>

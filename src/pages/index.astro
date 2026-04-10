@@ -5,7 +5,11 @@ import AdUnit from '../components/AdUnit.astro';
 import FAQ from '../components/FAQ.astro';
 import { generateCombos } from '../lib/landing-combos';
 
-const popularCombos = generateCombos().slice(0, 12);
+const allCombos = generateCombos();
+const currencies = ['MXN', 'COP', 'CLP', 'PEN', 'ARS', 'USD'];
+const popularCombos = currencies.flatMap((cur) =>
+  allCombos.filter((c) => c.currency === cur).slice(0, 2)
+);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -50,7 +54,7 @@ const faqs = [
 >
   <!-- Hero -->
   <section class="text-center py-12 md:py-16">
-    <h1 class="text-3xl md:text-5xl font-extrabold text-primary-900 dark:text-primary-200 mb-4 leading-tight">
+    <h1 class="text-3xl md:text-5xl font-extrabold text-primary-900 dark:text-primary-100 mb-4 leading-tight">
       Simulador de Crédito —<br class="hidden md:block" /> Calculadora de Préstamos LATAM
     </h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
@@ -69,14 +73,14 @@ const faqs = [
 
   <!-- Popular Simulations -->
   <section class="mb-10">
-    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-6">Simulaciones Populares</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-6">Simulaciones Populares</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {popularCombos.map((combo) => (
         <a
           href={`/simulador/${combo.slug}`}
           class="block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-primary-400 hover:shadow-md transition-all"
         >
-          <p class="font-semibold text-primary-800 dark:text-primary-300 text-sm mb-1">{combo.title}</p>
+          <p class="font-semibold text-primary-800 dark:text-primary-400 text-sm mb-1">{combo.title}</p>
           <p class="text-xs text-gray-500 dark:text-gray-400">{combo.description.slice(0, 80)}…</p>
         </a>
       ))}
@@ -85,7 +89,7 @@ const faqs = [
 
   <!-- Guides Section -->
   <section class="mb-10">
-    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-6">Guías de Amortización</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-6">Guías de Amortización</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {[
         { href: '/guias/sistema-frances', title: 'Sistema Francés', desc: 'Cuota fija durante todo el plazo. Ideal para planificación financiera.' },
@@ -94,7 +98,7 @@ const faqs = [
         { href: '/guias/comparar-creditos', title: 'Comparar Créditos', desc: 'Cómo elegir entre distintas ofertas de crédito.' },
       ].map((g) => (
         <a href={g.href} class="bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 rounded-xl p-5 hover:bg-primary-100 dark:hover:bg-primary-900/40 transition-colors">
-          <h3 class="font-bold text-primary-800 dark:text-primary-300 mb-2">{g.title}</h3>
+          <h3 class="font-bold text-primary-800 dark:text-primary-400 mb-2">{g.title}</h3>
           <p class="text-sm text-gray-600 dark:text-gray-400">{g.desc}</p>
         </a>
       ))}
@@ -103,7 +107,7 @@ const faqs = [
 
   <!-- Countries Section -->
   <section class="mb-10">
-    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-6">Por País</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-6">Por País</h2>
     <div class="flex flex-wrap gap-3">
       {[
         { href: '/paises/mexico', label: '🇲🇽 México' },

@@ -9,6 +9,7 @@ interface Props {
   defaultRate?: number;
   defaultYears?: number;
   currency?: string;
+  maxAmount?: number;
 }
 
 const CURRENCIES = ['MXN', 'COP', 'CLP', 'PEN', 'ARS', 'USD'];
@@ -18,6 +19,7 @@ export default function SimulatorApp({
   defaultRate = 12,
   defaultYears = 5,
   currency: defaultCurrency = 'MXN',
+  maxAmount = 10000000,
 }: Props) {
   const [amount, setAmount] = useState(defaultAmount);
   const [rate, setRate] = useState(defaultRate);
@@ -42,7 +44,7 @@ export default function SimulatorApp({
     <div>
       {/* Calculator Inputs */}
       <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
-        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-6">Configura tu Préstamo</h2>
+        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-6">Configura tu Préstamo</h2>
 
         {/* Currency */}
         <div class="mb-5">
@@ -66,7 +68,7 @@ export default function SimulatorApp({
           <input
             type="range"
             min={1000}
-            max={10000000}
+            max={maxAmount}
             step={1000}
             value={amount}
             onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
@@ -128,11 +130,11 @@ export default function SimulatorApp({
         {/* Results Comparison */}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-            <h3 class="font-bold text-primary-800 dark:text-primary-300 mb-3 text-sm">Sistema Francés (cuota fija)</h3>
+            <h3 class="font-bold text-primary-800 dark:text-primary-400 mb-3 text-sm">Sistema Francés (cuota fija)</h3>
             <div class="space-y-1 text-sm">
               <div class="flex justify-between">
                 <span class="text-gray-600 dark:text-gray-400">Cuota mensual:</span>
-                <span class="font-bold text-primary-800 dark:text-primary-300">{fmt(french.monthlyPayment)}</span>
+                <span class="font-bold text-primary-800 dark:text-primary-400">{fmt(french.monthlyPayment)}</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-gray-600 dark:text-gray-400">Total a pagar:</span>
@@ -166,7 +168,7 @@ export default function SimulatorApp({
 
       {/* Chart */}
       <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
-        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-4">Evolución del Préstamo</h2>
+        <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-4">Evolución del Préstamo</h2>
         <LoanChart
           frenchSchedule={french.schedule}
           germanSchedule={german.schedule}
@@ -177,7 +179,7 @@ export default function SimulatorApp({
       {/* Amortization Table */}
       <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <h2 class="text-xl font-bold text-primary-800 dark:text-primary-300">Tabla de Amortización</h2>
+          <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400">Tabla de Amortización</h2>
           <div class="flex gap-2">
             <button
               onClick={() => setTableSystem('french')}
