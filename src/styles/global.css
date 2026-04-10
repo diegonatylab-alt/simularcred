@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply text-gray-800 bg-white;
+  @apply text-gray-800 bg-white dark:bg-gray-950 dark:text-gray-200;
 }
 
 .container {
