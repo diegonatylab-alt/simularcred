@@ -28,21 +28,21 @@ const faqs = [
     { label: 'Argentina' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 mb-2">🇦🇷 Simulador de Crédito en Argentina</h1>
-  <p class="text-lg text-gray-600 mb-8">Calcula préstamos en pesos argentinos (ARS). Nota: las tasas nominales son elevadas por la inflación.</p>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-200 mb-2">🇦🇷 Simulador de Crédito en Argentina</h1>
+  <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos argentinos (ARS). Nota: las tasas nominales son elevadas por la inflación.</p>
 
-  <div class="bg-sky-50 border border-sky-200 rounded-xl p-4 mb-8 text-sm text-sky-800">
+  <div class="bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800 rounded-xl p-4 mb-8 text-sm text-sky-800 dark:text-sky-300">
     <strong>Tasas de referencia Argentina 2024:</strong> Personal 60–100% TNA • Hipotecario UVA 4–8% + inflación
   </div>
 
   <SimulatorApp client:visible defaultAmount={5000000} defaultRate={60} defaultYears={3} currency="ARS" />
 
   <section class="mt-10 mb-8">
-    <h2 class="text-2xl font-bold text-primary-800 mb-4">Simulaciones Populares en Argentina</h2>
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-300 mb-4">Simulaciones Populares en Argentina</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {arsCombos.map((c) => (
-        <a href={`/simulador/${c.slug}`} class="bg-white border rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
-          <span class="font-semibold text-primary-800">{c.title}</span>
+        <a href={`/simulador/${c.slug}`} class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
+          <span class="font-semibold text-primary-800 dark:text-primary-300">{c.title}</span>
         </a>
       ))}
     </div>
