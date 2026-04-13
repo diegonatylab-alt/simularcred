@@ -20,5 +20,11 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare()
+  adapter: cloudflare(),
+
+  vite: {
+    build: {
+      modulePreload: { polyfill: false },
+    },
+  },
 });
