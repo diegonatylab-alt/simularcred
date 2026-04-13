@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const currentPath = Astro.url.pathname;
 
 const schema = {
   '@context': 'https://schema.org',
@@ -17,7 +18,9 @@ const schema = {
     '@type': 'ListItem',
     position: i + 1,
     name: item.label,
-    ...(item.href ? { item: `https://simuladorcredito.lat${item.href}` } : {}),
+    item: item.href
+      ? `https://simuladorcredito.lat${item.href}`
+      : `https://simuladorcredito.lat${currentPath}`,
   })),
 };
 ---
