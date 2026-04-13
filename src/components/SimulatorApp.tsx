@@ -1,8 +1,34 @@
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useRef, useEffect } from 'preact/hooks';
+import type { ComponentType } from 'preact';
 import { calculateFrench, calculateGerman } from '../lib/amortization';
 import { formatCurrency } from '../lib/formatters';
-import LoanChart from './Chart';
 import AmortizationTable from './AmortizationTable';
+
+function useLazyComponent<P>(
+  importFn: () => Promise<{ default: ComponentType<P> }>,
+  rootMargin = '200px',
+) {
+  const [Component, setComponent] = useState<ComponentType<P> | null>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          importFn().then((mod) => setComponent(() => mod.default));
+        }
+      },
+      { rootMargin },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return { Component, sentinelRef };
+}
 
 interface Props {
   defaultAmount?: number;
@@ -26,6 +52,10 @@ export default function SimulatorApp({
   const [years, setYears] = useState(defaultYears);
   const [currency, setCurrency] = useState(defaultCurrency);
   const [tableSystem, setTableSystem] = useState<'french' | 'german'>('french');
+
+  const { Component: LoanChart, sentinelRef: chartSentinel } = useLazyComponent(
+    () => import('./Chart'),
+  );
 
   const french = useMemo(
     () => calculateFrench({ principal: amount, annualRate: rate, termMonths: years * 12 }),
@@ -174,13 +204,19 @@ export default function SimulatorApp({
       </div>
 
       {/* Chart */}
-      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
+      <div ref={chartSentinel} class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
         <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mb-4">Evolución del Préstamo</h2>
-        <LoanChart
-          frenchSchedule={french.schedule}
-          germanSchedule={german.schedule}
-          currency={currency}
-        />
+        {LoanChart ? (
+          <LoanChart
+            frenchSchedule={french.schedule}
+            germanSchedule={german.schedule}
+            currency={currency}
+          />
+        ) : (
+          <div class="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+            Cargando gráfico…
+          </div>
+        )}
       </div>
 
       {/* Amortization Table */}
