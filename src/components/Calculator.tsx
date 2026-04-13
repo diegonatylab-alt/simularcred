@@ -37,8 +37,9 @@ export default function Calculator({
       {/* Currency & System */}
       <div class="grid grid-cols-2 gap-4 mb-6">
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Moneda</label>
+          <label htmlFor="calc-currency" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Moneda</label>
           <select
+            id="calc-currency"
             value={currency}
             onChange={(e) => setCurrency((e.target as HTMLSelectElement).value)}
             class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -49,8 +50,9 @@ export default function Calculator({
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sistema</label>
+          <label htmlFor="calc-system" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sistema</label>
           <select
+            id="calc-system"
             value={system}
             onChange={(e) => setSystem((e.target as HTMLSelectElement).value as 'french' | 'german')}
             class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -63,7 +65,7 @@ export default function Calculator({
 
       {/* Amount */}
       <div class="mb-5">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="calc-amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Monto del Préstamo: <span class="font-bold text-primary-700 dark:text-primary-400">{fmt(amount)}</span>
         </label>
         <input
@@ -72,11 +74,13 @@ export default function Calculator({
           max={10000000}
           step={1000}
           value={amount}
+          aria-label="Monto del préstamo (deslizador)"
           onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
           class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
         />
         <input
           type="number"
+          id="calc-amount"
           value={amount}
           onInput={(e) => setAmount(Number((e.target as HTMLInputElement).value))}
           class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -85,7 +89,7 @@ export default function Calculator({
 
       {/* Rate */}
       <div class="mb-5">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="calc-rate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Tasa Anual: <span class="font-bold text-primary-700 dark:text-primary-400">{rate}%</span>
         </label>
         <input
@@ -94,11 +98,13 @@ export default function Calculator({
           max={120}
           step={0.5}
           value={rate}
+          aria-label="Tasa anual (deslizador)"
           onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
           class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
         />
         <input
           type="number"
+          id="calc-rate"
           value={rate}
           step={0.1}
           onInput={(e) => setRate(Number((e.target as HTMLInputElement).value))}
@@ -108,7 +114,7 @@ export default function Calculator({
 
       {/* Years */}
       <div class="mb-6">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="calc-years" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Plazo: <span class="font-bold text-primary-700 dark:text-primary-400">{years} año{years !== 1 ? 's' : ''}</span>
         </label>
         <input
@@ -117,11 +123,13 @@ export default function Calculator({
           max={30}
           step={1}
           value={years}
+          aria-label="Plazo en años (deslizador)"
           onInput={(e) => setYears(Number((e.target as HTMLInputElement).value))}
           class="w-full h-2 bg-primary-100 dark:bg-primary-900/40 rounded-lg appearance-none cursor-pointer accent-primary-700"
         />
         <input
           type="number"
+          id="calc-years"
           value={years}
           onInput={(e) => setYears(Number((e.target as HTMLInputElement).value))}
           class="mt-2 w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
