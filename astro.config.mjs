@@ -3,9 +3,12 @@ import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   output: 'static',
   site: 'https://simuladorcredito.lat',
+
   integrations: [
     preact({ compat: true }),
     tailwind(),
@@ -16,4 +19,6 @@ export default defineConfig({
       customPages: [],
     }),
   ],
+
+  adapter: cloudflare()
 });
