@@ -149,7 +149,7 @@ export default function SimulatorApp({
               </div>
               <div class="flex justify-between">
                 <span class="text-gray-600 dark:text-gray-400">Total intereses:</span>
-                <span class="font-bold text-red-600 dark:text-red-400">{fmt(french.totalInterest)}</span>
+                <span class="font-bold text-red-700 dark:text-red-400">{fmt(french.totalInterest)}</span>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@ export default function SimulatorApp({
               </div>
               <div class="flex justify-between">
                 <span class="text-gray-600 dark:text-gray-400">Total intereses:</span>
-                <span class="font-bold text-red-600 dark:text-red-400">{fmt(german.totalInterest)}</span>
+                <span class="font-bold text-red-700 dark:text-red-400">{fmt(german.totalInterest)}</span>
               </div>
             </div>
           </div>
