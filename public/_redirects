@@ -1,4 +1,0 @@
-# www → non-www (301 permanente)
-https://www.simularcred.com/* https://simularcred.com/:splat 301
-http://www.simularcred.com/* https://simularcred.com/:splat 301
-http://simularcred.com/* https://simularcred.com/:splat 301
