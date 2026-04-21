@@ -22,6 +22,12 @@ export const affiliatesByCurrency: Record<string, AffiliateOffer[]> = {
       url: 'https://dkfrh.com/g/wqiksqr21j9bc27b6f98bd6fe4c78f/',
       badge: 'Recomendado',
     },
+    {
+      name: 'Fidea',
+      description: 'Encuentra el préstamo que se adapta a tus necesidades fácilmente en México. Flexibilidad. Confianza. Rápido y conveniente. Intereses Bajos.',
+      url: 'https://bednari.com/g/zooimzunir9bc27b6f98dd97e777e7/',
+      badge: 'Recomendado',
+    },  
   ],
   // Add more currencies as affiliates become available:
   // COP: [ { name: '...', description: '...', url: '...', badge: '...' } ],
