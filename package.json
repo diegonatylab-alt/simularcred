@@ -17,6 +17,8 @@
     "@types/chart.js": "^2.9.41",
     "astro": "5.18.1",
     "chart.js": "^4.5.1",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "preact": "^10.29.1",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"
