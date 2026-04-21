@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect, useCallback } from 'preact/hooks'
 import type { ComponentType } from 'preact';
 import { calculateFrench, calculateGerman } from '../lib/amortization';
 import { formatCurrency } from '../lib/formatters';
+import { exportCSV, exportPDF } from '../lib/export';
 import AmortizationTable from './AmortizationTable';
 
 function readParamsFromURL(defaults: { amount: number; rate: number; years: number; currency: string }) {
@@ -310,6 +311,32 @@ export default function SimulatorApp({
           </div>
         </div>
         <AmortizationTable schedule={activeSchedule} currency={currency} />
+
+        {/* Export buttons */}
+        <div class="mt-4 flex flex-wrap gap-3">
+          <button
+            onClick={() => exportCSV(activeSchedule, currency, tableSystem)}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            Descargar CSV
+          </button>
+          <button
+            onClick={() => {
+              const active = tableSystem === 'french' ? french : german;
+              exportPDF(activeSchedule, currency, tableSystem, {
+                amount, rate, years,
+                monthlyPayment: active.monthlyPayment,
+                totalPayment: active.totalPayment,
+                totalInterest: active.totalInterest,
+              });
+            }}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-red-600 text-white hover:bg-red-700 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+            Descargar PDF
+          </button>
+        </div>
       </div>
     </div>
   );
