@@ -3,6 +3,8 @@ import type { ComponentType } from 'preact';
 import { calculateFrench, calculateGerman } from '../lib/amortization';
 import { formatCurrency } from '../lib/formatters';
 import { exportCSV, exportPDF } from '../lib/export';
+import { affiliatesByCurrency } from '../lib/affiliates';
+import type { AffiliateOffer } from '../lib/affiliates';
 import AmortizationTable from './AmortizationTable';
 
 function readParamsFromURL(defaults: { amount: number; rate: number; years: number; currency: string }) {
@@ -271,6 +273,44 @@ export default function SimulatorApp({
           </button>
         </div>
       </div>
+
+      {/* Affiliate CTA — only when offers exist for the selected currency */}
+      {(affiliatesByCurrency[currency] ?? []).length > 0 && (
+        <div class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/30 dark:to-blue-900/20 border border-primary-200 dark:border-primary-700 rounded-2xl p-6 md:p-8 mb-10">
+          <p class="text-xs font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-400 mb-3">
+            Ofertas de crédito disponibles
+          </p>
+          <div class="space-y-4">
+            {(affiliatesByCurrency[currency] as AffiliateOffer[]).map((offer) => (
+              <div key={offer.url} class="flex flex-col sm:flex-row sm:items-center gap-4 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-bold text-gray-900 dark:text-gray-100">{offer.name}</span>
+                    {offer.badge && (
+                      <span class="inline-block px-2 py-0.5 text-[11px] font-bold uppercase rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300">
+                        {offer.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">{offer.description}</p>
+                </div>
+                <a
+                  href={offer.url}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-primary-700 text-white hover:bg-primary-800 transition-colors whitespace-nowrap"
+                >
+                  Solicitar ahora
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+              </div>
+            ))}
+          </div>
+          <p class="mt-3 text-[11px] text-gray-500 dark:text-gray-500">
+            Publicidad · SimularCred puede recibir una comisión si solicitas un crédito a través de estos enlaces.
+          </p>
+        </div>
+      )}
 
       {/* Chart */}
       <div ref={chartSentinel} class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-6 md:p-8 mb-10">
