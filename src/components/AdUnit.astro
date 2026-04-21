@@ -1,39 +1,42 @@
 ---
 interface Props {
   slot: string;
-  format: 'horizontal' | 'rectangle' | 'vertical';
+  format: 'horizontal' | 'rectangle' | 'vertical' | 'auto';
 }
 
-const { slot, format } = Astro.props;
+const { slot, format = 'auto' } = Astro.props;
 
-const sizeClasses: Record<string, string> = {
-  horizontal: 'w-full h-24',
-  rectangle: 'w-full h-64',
-  vertical: 'w-40 h-96',
+const layoutMap: Record<string, string> = {
+  horizontal: 'in-article',
+  rectangle: 'in-article',
+  vertical: 'in-article',
+  auto: 'in-article',
 };
 ---
 
-<div
-  class={`ad-unit bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-500 text-xs rounded-lg overflow-hidden ${sizeClasses[format]}`}
-  data-ad-slot={slot}
-  data-ad-format={format}
-  data-ad-client="ca-pub-XXXXXXXXXX"
->
-  <span>Publicidad</span>
+<div class="ad-unit my-4 min-h-[100px] overflow-hidden">
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-3904107966422584"
+    data-ad-slot={slot}
+    data-ad-format="fluid"
+    data-ad-layout-key="-6t+ed+2i-1n-4w"
+    data-ad-layout={layoutMap[format]}
+  ></ins>
 </div>
 
-<script>
-  const adUnits = document.querySelectorAll<HTMLElement>('.ad-unit');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Initialize AdSense here when real pub ID is available
+<script is:inline>
+  (function(){
+    var ads = document.querySelectorAll('.ad-unit');
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
           observer.unobserve(entry.target);
         }
       });
-    },
-    { rootMargin: '200px' }
-  );
-  adUnits.forEach((el) => observer.observe(el));
+    }, { rootMargin: '200px' });
+    ads.forEach(function(el){ observer.observe(el); });
+  })();
 </script>
