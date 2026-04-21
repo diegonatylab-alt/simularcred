@@ -17,7 +17,10 @@ export function exportCSV(schedule: AmortizationRow[], currency: string, system:
   downloadBlob(blob, `amortizacion-${system}-${currency}.csv`);
 }
 
-// ─── PDF ────────────────────────────────────────────────────────────────────────
+// ─── PDF (loaded from CDN on demand — zero bundle impact) ───────────────────
+
+const JSPDF_CDN = 'https://esm.sh/jspdf@2.5.2';
+const AUTOTABLE_CDN = 'https://esm.sh/jspdf-autotable@3.8.4';
 
 export async function exportPDF(
   schedule: AmortizationRow[],
@@ -25,10 +28,14 @@ export async function exportPDF(
   system: string,
   summary: { amount: number; rate: number; years: number; monthlyPayment: number; totalPayment: number; totalInterest: number },
 ) {
-  const [{ jsPDF }, autoTable] = await Promise.all([
-    import('jspdf'),
-    import('jspdf-autotable'),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [jspdfMod, autoTableMod]: [any, any] = await Promise.all([
+    import(/* @vite-ignore */ JSPDF_CDN),
+    import(/* @vite-ignore */ AUTOTABLE_CDN),
   ]);
+
+  const jsPDF = jspdfMod.jsPDF || jspdfMod.default;
+  const autoTable = autoTableMod.default || autoTableMod;
 
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   const fmt = (n: number) => formatCurrency(n, currency);
@@ -55,7 +62,7 @@ export async function exportPDF(
   doc.text(summaryText, 14, 31);
 
   // Table
-  (autoTable.default || autoTable)(doc, {
+  autoTable(doc, {
     startY: 36,
     head: [HEADERS],
     body: schedule.map((r) => [
