@@ -15,7 +15,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
   name: 'Simulador de Crédito LATAM',
-  url: 'https://simuladorcredito.lat',
+  url: 'https://simularcred.com',
   description: 'Calculadora de préstamos y simulador de crédito para América Latina con amortización francesa y alemana.',
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'Web',
@@ -37,7 +37,7 @@ const faqs = [
   },
   {
     question: '¿Para qué países sirve esta calculadora?',
-    answer: 'SimularCred está diseñado para México (MXN), Colombia (COP), Chile (CLP), Perú (PEN), Argentina (ARS) y también funciona con dólares estadounidenses (USD).',
+    answer: 'SimularCred está diseñado para México (MXN), Colombia (COP), Chile (CLP), Perú (PEN), Argentina (ARS) y Estados Unidos (USD).',
   },
   {
     question: '¿Es gratuita la calculadora?',
@@ -49,7 +49,7 @@ const faqs = [
 <LandingLayout
   title="Simulador de Crédito — Calculadora de Préstamos LATAM | SimularCred"
   description="Simula préstamos en México, Colombia, Chile, Perú y Argentina. Calcula cuotas, tabla de amortización francesa y alemana. Gratis y sin registro."
-  canonical="https://simuladorcredito.lat/"
+  canonical="https://simularcred.com/"
   schema={schema}
 >
   <!-- Hero -->
@@ -115,6 +115,7 @@ const faqs = [
         { href: '/paises/argentina', label: '🇦🇷 Argentina' },
         { href: '/paises/chile', label: '🇨🇱 Chile' },
         { href: '/paises/peru', label: '🇵🇪 Perú' },
+        { href: '/paises/estados-unidos', label: '🇺🇸 Estados Unidos' },
       ].map((p) => (
         <a href={p.href} class="px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full font-medium hover:border-primary-400 hover:text-primary-700 dark:hover:text-primary-400 transition-colors">
           {p.label}

@@ -7,7 +7,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   output: 'static',
-  site: 'https://simuladorcredito.lat',
+  site: 'https://simularcred.com',
 
   integrations: [
     preact({ compat: true }),

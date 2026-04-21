@@ -1,0 +1,56 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import SimulatorApp from '../../components/SimulatorApp';
+import FAQ from '../../components/FAQ.astro';
+import { generateCombos } from '../../lib/landing-combos';
+
+const usdCombos = generateCombos().filter((c) => c.currency === 'USD').slice(0, 8);
+
+const faqs = [
+  {
+    question: '¿Cuáles son las tasas de interés típicas en Estados Unidos?',
+    answer: 'En 2024, las tasas hipotecarias rondan el 6–8% anual, los préstamos personales entre 8–15% y los préstamos para auto entre 5–10%, dependiendo del puntaje crediticio.',
+  },
+  {
+    question: '¿Qué es el credit score y cómo afecta mi crédito?',
+    answer: 'El credit score (puntaje de crédito) es un número entre 300 y 850 que refleja tu historial crediticio. A mayor puntaje, mejores tasas y condiciones de préstamo puedes obtener.',
+  },
+  {
+    question: '¿Qué tipos de préstamos son comunes en Estados Unidos?',
+    answer: 'Los más comunes son hipotecarios (mortgage), préstamos personales (personal loans), préstamos para auto (auto loans) y líneas de crédito (HELOC). Cada uno tiene tasas y plazos diferentes.',
+  },
+];
+---
+
+<LandingLayout
+  title="Simulador de Crédito Estados Unidos (USD) | SimularCred"
+  description="Calcula préstamos en dólares estadounidenses (USD). Tabla de amortización francesa y alemana para créditos en Estados Unidos."
+  canonical="https://simularcred.com/paises/estados-unidos"
+  breadcrumbs={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Países' },
+    { label: 'Estados Unidos' },
+  ]}
+>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇺🇸 Simulador de Crédito en Estados Unidos</h1>
+  <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en dólares estadounidenses (USD) con las tasas referenciales del mercado.</p>
+
+  <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4 mb-8 text-sm text-indigo-800 dark:text-indigo-300">
+    <strong>Tasas de referencia EE.UU. 2024:</strong> Hipotecario 6–8% • Personal 8–15% • Auto 5–10% • Estudiantil 5–8%
+  </div>
+
+  <SimulatorApp client:idle defaultAmount={50000} defaultRate={8} defaultYears={5} currency="USD" />
+
+  <section class="mt-10 mb-8">
+    <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-4">Simulaciones Populares en Estados Unidos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {usdCombos.map((c) => (
+        <a href={`/simulador/${c.slug}`} class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-3 text-sm hover:border-primary-400 transition-colors">
+          <span class="font-semibold text-primary-800 dark:text-primary-400">{c.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+</LandingLayout>
