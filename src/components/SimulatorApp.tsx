@@ -78,9 +78,14 @@ export default function SimulatorApp({
   const [currency, setCurrency] = useState(initial.currency);
   const [tableSystem, setTableSystem] = useState<'french' | 'german'>('french');
   const [copied, setCopied] = useState(false);
+  const isFirstRender = useRef(true);
 
-  // Sync state → URL (debounced via replaceState)
+  // Sync state → URL (skip first render to avoid forced reflow)
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     const url = buildShareURL(amount, rate, years, currency);
     window.history.replaceState(null, '', url);
   }, [amount, rate, years, currency]);
