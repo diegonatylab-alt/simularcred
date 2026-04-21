@@ -27,6 +27,12 @@ export const affiliatesByCurrency: Record<string, AffiliateOffer[]> = {
       description: 'Encuentra el préstamo que se adapta a tus necesidades fácilmente en México. Flexibilidad. Confianza. Rápido y conveniente. Intereses Bajos.',
       url: 'https://bednari.com/g/zooimzunir9bc27b6f98dd97e777e7/',
       badge: 'Recomendado',
+    },
+    {
+      name: 'Fiesta Credito',
+      description: 'Obtén tu primer préstamo al 0% de interés. Respuesta inmediata.',
+      url: 'https://low-prices.eu/a/lYoE4TXmgmtqp7V',
+      badge: '',
     },  
   ],
   // Add more currencies as affiliates become available:
