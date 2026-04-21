@@ -28,10 +28,21 @@ const layoutMap: Record<string, string> = {
 
 <script is:inline>
   (function(){
+    var adsLoaded = false;
+    function loadAdSense() {
+      if (adsLoaded) return;
+      adsLoaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3904107966422584';
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      document.head.appendChild(s);
+    }
     var ads = document.querySelectorAll('.ad-unit');
     var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
+          loadAdSense();
           try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
           observer.unobserve(entry.target);
         }
