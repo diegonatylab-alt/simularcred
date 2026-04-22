@@ -29,7 +29,7 @@ const faqs = [
     { label: 'Chile' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇨🇱 Simulador de Crédito en Chile</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2"><img src="https://flagcdn.com/28x21/cl.png" alt="Bandera de Chile" width="28" height="21" class="inline-block align-baseline mr-2" loading="eager" /> Simulador de Crédito en Chile</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos chilenos (CLP) con las tasas del mercado chileno.</p>
 
   <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-8 text-sm text-red-800 dark:text-red-300">
@@ -39,7 +39,7 @@ const faqs = [
   <SimulatorApp client:idle defaultAmount={10000000} defaultRate={8} defaultYears={5} currency="CLP" />
 
   <div class="mt-10 mb-10">
-    <SalaryCalculator client:idle />
+    <SalaryCalculator client:idle currency="CLP" />
   </div>
 
   <section class="mt-10 mb-8">
