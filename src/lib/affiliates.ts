@@ -31,9 +31,17 @@ export const affiliatesByCurrency: Record<string, AffiliateOffer[]> = {
     {
       name: 'Fiesta Credito',
       description: 'Obtén tu primer préstamo al 0% de interés. Respuesta inmediata.',
-      url: 'https://low-prices.eu/a/lYoE4TXmgmtqp7V',
+      url: 'https://ntzgd.com/g/o8imz4ub7p9bc27b6f984abe4b8882/',
       badge: '',
     },  
+  ],
+  COP: [
+    {
+      name: 'Sol Crédito CO',
+      description: 'Créditos en línea rápidos y seguros en Colombia. Extra $1.500.000 desde 0% para eventos especiales.',
+      url: 'https://lowest-prices.eu/a/PNoWDU5KmHjG7r',
+      badge: 'Recomendado',
+    },
   ],
   // Add more currencies as affiliates become available:
   // COP: [ { name: '...', description: '...', url: '...', badge: '...' } ],
