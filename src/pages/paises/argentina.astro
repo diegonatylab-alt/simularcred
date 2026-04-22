@@ -29,7 +29,7 @@ const faqs = [
     { label: 'Argentina' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇦🇷 Simulador de Crédito en Argentina</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2"><img src="https://flagcdn.com/28x21/ar.png" alt="Bandera de Argentina" width="28" height="21" class="inline-block align-baseline mr-2" loading="eager" /> Simulador de Crédito en Argentina</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos argentinos (ARS). Nota: las tasas nominales son elevadas por la inflación.</p>
 
   <div class="bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-800 rounded-xl p-4 mb-8 text-sm text-sky-800 dark:text-sky-300">
@@ -39,7 +39,7 @@ const faqs = [
   <SimulatorApp client:idle defaultAmount={5000000} defaultRate={60} defaultYears={3} currency="ARS" maxAmount={200000000} />
 
   <div class="mt-10 mb-10">
-    <SalaryCalculator client:idle />
+    <SalaryCalculator client:idle currency="ARS" />
   </div>
 
   <section class="mt-10 mb-8">

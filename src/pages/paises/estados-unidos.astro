@@ -33,7 +33,7 @@ const faqs = [
     { label: 'Estados Unidos' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇺🇸 Simulador de Crédito en Estados Unidos</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2"><img src="https://flagcdn.com/28x21/us.png" alt="Bandera de Estados Unidos" width="28" height="21" class="inline-block align-baseline mr-2" loading="eager" /> Simulador de Crédito en Estados Unidos</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en dólares estadounidenses (USD) con las tasas referenciales del mercado.</p>
 
   <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4 mb-8 text-sm text-indigo-800 dark:text-indigo-300">
@@ -43,7 +43,7 @@ const faqs = [
   <SimulatorApp client:idle defaultAmount={50000} defaultRate={8} defaultYears={5} currency="USD" />
 
   <div class="mt-10 mb-10">
-    <SalaryCalculator client:idle />
+    <SalaryCalculator client:idle currency="USD" />
   </div>
 
   <section class="mt-10 mb-8">

@@ -38,9 +38,9 @@ const DEBT_RATIOS = [
   { value: 0.40, label: '40% — Máximo' },
 ];
 
-export default function SalaryCalculator() {
-  const [currency, setCurrency] = useState('MXN');
-  const [salary, setSalary] = useState(SALARY_DEFAULTS.MXN);
+export default function SalaryCalculator({ currency: defaultCurrency = 'MXN' }: { currency?: string }) {
+  const [currency, setCurrency] = useState(defaultCurrency);
+  const [salary, setSalary] = useState(SALARY_DEFAULTS[defaultCurrency] ?? 25000);
   const [rate, setRate] = useState(12);
   const [years, setYears] = useState(10);
   const [debtRatio, setDebtRatio] = useState(0.30);

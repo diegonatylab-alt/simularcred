@@ -33,7 +33,7 @@ const faqs = [
     { label: 'México' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇲🇽 Simulador de Crédito en México</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2"><img src="https://flagcdn.com/28x21/mx.png" alt="Bandera de México" width="28" height="21" class="inline-block align-baseline mr-2" loading="eager" /> Simulador de Crédito en México</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos mexicanos (MXN) con las tasas referenciales del mercado.</p>
 
   <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-8 text-sm text-amber-800 dark:text-amber-300">
@@ -43,7 +43,7 @@ const faqs = [
   <SimulatorApp client:idle defaultAmount={200000} defaultRate={12} defaultYears={10} currency="MXN" />
 
   <div class="mt-10 mb-10">
-    <SalaryCalculator client:idle />
+    <SalaryCalculator client:idle currency="MXN" />
   </div>
 
   <section class="mt-10 mb-8">

@@ -29,7 +29,7 @@ const faqs = [
     { label: 'Colombia' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇨🇴 Simulador de Crédito en Colombia</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2"><img src="https://flagcdn.com/28x21/co.png" alt="Bandera de Colombia" width="28" height="21" class="inline-block align-baseline mr-2" loading="eager" /> Simulador de Crédito en Colombia</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en pesos colombianos (COP) con las tasas del mercado colombiano.</p>
 
   <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 mb-8 text-sm text-yellow-800 dark:text-yellow-300">
@@ -39,7 +39,7 @@ const faqs = [
   <SimulatorApp client:idle defaultAmount={20000000} defaultRate={14} defaultYears={5} currency="COP" />
 
   <div class="mt-10 mb-10">
-    <SalaryCalculator client:idle />
+    <SalaryCalculator client:idle currency="COP" />
   </div>
 
   <section class="mt-10 mb-8">
