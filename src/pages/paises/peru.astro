@@ -29,7 +29,7 @@ const faqs = [
     { label: 'Perú' },
   ]}
 >
-  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2">🇵🇪 Simulador de Crédito en Perú</h1>
+  <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-2"><img src="https://flagcdn.com/28x21/pe.png" alt="Bandera de Perú" width="28" height="21" class="inline-block align-baseline mr-2" loading="eager" /> Simulador de Crédito en Perú</h1>
   <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Calcula préstamos en soles peruanos (PEN) con las tasas del mercado peruano.</p>
 
   <div class="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl p-4 mb-8 text-sm text-orange-800 dark:text-orange-300">
@@ -39,7 +39,7 @@ const faqs = [
   <SimulatorApp client:idle defaultAmount={50000} defaultRate={12} defaultYears={5} currency="PEN" />
 
   <div class="mt-10 mb-10">
-    <SalaryCalculator client:idle />
+    <SalaryCalculator client:idle currency="PEN" />
   </div>
 
   <section class="mt-10 mb-8">
