@@ -140,6 +140,29 @@ export function calculateGerman(input: LoanInput): LoanResult {
   };
 }
 
+/**
+ * Inverse calculation: given a monthly payment capacity, rate, and term,
+ * calculate the maximum loan principal (French system).
+ */
+export function maxPrincipalFrench(monthlyPayment: number, annualRate: number, termMonths: number): number {
+  const r = annualRate / 100 / 12;
+  if (r === 0) return round2(monthlyPayment * termMonths);
+  return round2(monthlyPayment * (Math.pow(1 + r, termMonths) - 1) / (r * Math.pow(1 + r, termMonths)));
+}
+
+/**
+ * Inverse calculation: given a monthly payment capacity, rate, and term,
+ * calculate the maximum loan principal (German system).
+ * Uses the first (highest) payment as the constraint.
+ */
+export function maxPrincipalGerman(monthlyPayment: number, annualRate: number, termMonths: number): number {
+  const r = annualRate / 100 / 12;
+  // German first payment = P/n + P*r  →  PMT = P*(1/n + r)  →  P = PMT / (1/n + r)
+  const divisor = 1 / termMonths + r;
+  if (divisor === 0) return 0;
+  return round2(monthlyPayment / divisor);
+}
+
 function round2(n: number): number {
   return Math.round(n * 100) / 100;
 }
