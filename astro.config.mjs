@@ -13,10 +13,23 @@ export default defineConfig({
     preact({ compat: true }),
     tailwind(),
     sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
       lastmod: new Date(),
-      customPages: [],
+      serialize(item) {
+        if (item.url === 'https://simularcred.com/' || item.url === 'https://simularcred.com') {
+          item.priority = 1.0;
+          item.changefreq = 'daily';
+        } else if (item.url.includes('/guias/') || item.url.includes('/paises/')) {
+          item.priority = 0.8;
+          item.changefreq = 'weekly';
+        } else if (item.url.includes('/simulador/')) {
+          item.priority = 0.5;
+          item.changefreq = 'monthly';
+        } else {
+          item.priority = 0.6;
+          item.changefreq = 'monthly';
+        }
+        return item;
+      },
     }),
   ],
 
