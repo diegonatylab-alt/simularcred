@@ -1,6 +1,7 @@
 ---
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import SimulatorApp from '../../components/SimulatorApp';
+import SalaryCalculator from '../../components/SalaryCalculator';
 import FAQ from '../../components/FAQ.astro';
 import { generateCombos } from '../../lib/landing-combos';
 
@@ -36,6 +37,10 @@ const faqs = [
   </div>
 
   <SimulatorApp client:idle defaultAmount={50000} defaultRate={12} defaultYears={5} currency="PEN" />
+
+  <div class="mt-10 mb-10">
+    <SalaryCalculator client:idle />
+  </div>
 
   <section class="mt-10 mb-8">
     <h2 class="text-2xl font-bold text-primary-800 dark:text-primary-400 mb-4">Simulaciones Populares en Perú</h2>
