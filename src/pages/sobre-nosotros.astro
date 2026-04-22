@@ -12,30 +12,77 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-6">Sobre Nosotros</h1>
 
     <p class="text-gray-700 dark:text-gray-300 mb-4">
-      <strong>SimularCred</strong> es una herramienta gratuita de simulación de créditos diseñada específicamente para usuarios de América Latina. Nuestro objetivo es hacer la educación financiera más accesible y ayudar a las personas a tomar mejores decisiones de crédito.
+      <strong>SimularCred</strong> es una plataforma gratuita de simulación de créditos diseñada específicamente para usuarios de América Latina. Nuestro objetivo es hacer la educación financiera más accesible y ayudar a las personas a tomar decisiones informadas antes de solicitar un préstamo.
     </p>
-
-    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-6 mb-3">Nuestra Misión</h2>
     <p class="text-gray-700 dark:text-gray-300 mb-4">
-      Creemos que toda persona debe poder entender claramente cuánto paga de intereses, cómo evoluciona su deuda y qué sistema de amortización le conviene más, antes de firmar cualquier crédito.
+      Fundada en 2026, SimularCred nació de una necesidad real: las herramientas de simulación financiera existentes estaban diseñadas para mercados anglosajones, con monedas y condiciones que no reflejan la realidad de Latinoamérica. Creamos una calculadora que entiende las particularidades de cada país y su mercado crediticio.
     </p>
 
-    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-6 mb-3">¿Qué ofrecemos?</h2>
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">Nuestra Misión</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      Creemos que toda persona debe poder entender claramente cuánto paga de intereses, cómo evoluciona su deuda y qué sistema de amortización le conviene más, <strong>antes</strong> de firmar cualquier contrato de crédito. La transparencia financiera es un derecho, no un privilegio.
+    </p>
+
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">¿Qué ofrecemos?</h2>
     <ul class="text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-      <li>✅ Simulación en MXN, COP, CLP, PEN, ARS y USD</li>
-      <li>✅ Tabla de amortización francesa y alemana</li>
-      <li>✅ Gráficas de evolución del crédito</li>
-      <li>✅ Guías educativas en español</li>
-      <li>✅ Sin registro, sin costos</li>
+      <li>✅ <strong>Simulador de crédito multimoneda:</strong> MXN, COP, CLP, PEN, ARS y USD con formateo local</li>
+      <li>✅ <strong>Dos sistemas de amortización:</strong> francés (cuota fija) y alemán (capital fijo) para comparar</li>
+      <li>✅ <strong>Tabla de amortización completa:</strong> desglose mes a mes con intereses, capital y saldo</li>
+      <li>✅ <strong>Gráfico interactivo:</strong> visualiza la evolución de tu deuda a lo largo del tiempo</li>
+      <li>✅ <strong>Calculadora inversa:</strong> descubre cuánto te pueden prestar según tu sueldo</li>
+      <li>✅ <strong>Exportación en PDF y CSV:</strong> descarga tu tabla para llevarla al banco o tu asesor</li>
+      <li>✅ <strong>Guías educativas en español:</strong> contenido original sobre amortización y créditos</li>
+      <li>✅ <strong>Sin registro, sin costos, sin publicidad invasiva</strong></li>
     </ul>
 
-    <h2 id="aviso-legal" class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-6 mb-3">Aviso Legal</h2>
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">¿Para quién es SimularCred?</h2>
     <p class="text-gray-700 dark:text-gray-300 mb-4">
-      SimularCred es una herramienta informativa. Los resultados son estimaciones basadas en las condiciones ingresadas y no constituyen oferta, asesoría financiera ni contrato. Las tasas reales pueden variar según la institución financiera.
+      Nuestra herramienta está diseñada para cualquier persona que esté evaluando un crédito: desde quien busca su primera tarjeta de crédito hasta quien analiza un préstamo hipotecario a 20 años. También es útil para estudiantes de finanzas, asesores financieros y educadores que necesitan ilustrar cómo funcionan los sistemas de amortización.
     </p>
 
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">Compromiso con la precisión</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      Nuestros cálculos utilizan las fórmulas estándar de amortización empleadas por instituciones financieras en todo el mundo. Sin embargo, los resultados son <strong>estimaciones orientativas</strong>. El costo real de un crédito puede variar según comisiones, seguros obligatorios, gastos notariales y condiciones específicas de cada entidad.
+    </p>
+
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">Países que cubrimos</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      Actualmente ofrecemos simulaciones optimizadas para seis mercados:
+    </p>
+    <ul class="text-gray-700 dark:text-gray-300 space-y-1 mb-4">
+      <li>🇲🇽 <strong>México</strong> — Pesos mexicanos (MXN)</li>
+      <li>🇨🇴 <strong>Colombia</strong> — Pesos colombianos (COP)</li>
+      <li>🇦🇷 <strong>Argentina</strong> — Pesos argentinos (ARS)</li>
+      <li>🇨🇱 <strong>Chile</strong> — Pesos chilenos (CLP)</li>
+      <li>🇵🇪 <strong>Perú</strong> — Soles peruanos (PEN)</li>
+      <li>🇺🇸 <strong>Estados Unidos</strong> — Dólares estadounidenses (USD)</li>
+    </ul>
+
+    <h2 id="aviso-legal" class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">Aviso Legal</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      SimularCred es una herramienta de carácter exclusivamente informativo y educativo. Los resultados mostrados son estimaciones matemáticas basadas en los datos ingresados por el usuario y <strong>no constituyen oferta comercial, asesoría financiera profesional, ni contrato de ningún tipo</strong>.
+    </p>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      Las tasas de interés, plazos y condiciones reales de un crédito dependen de cada institución financiera y de la evaluación crediticia individual. Recomendamos siempre consultar directamente con la entidad financiera antes de tomar cualquier decisión de crédito.
+    </p>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      SimularCred no es una institución financiera, no otorga créditos ni actúa como intermediario financiero. Los enlaces a productos de terceros son de carácter publicitario y pueden generar una comisión para SimularCred sin costo adicional para el usuario.
+    </p>
+
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">Propiedad Intelectual</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      Todo el contenido de SimularCred — incluyendo textos, diseño, código fuente, logotipos y material gráfico — es propiedad de sus creadores y está protegido por las leyes de propiedad intelectual aplicables. Queda prohibida su reproducción total o parcial sin autorización escrita.
+    </p>
+
+    <h2 class="text-xl font-bold text-primary-800 dark:text-primary-400 mt-8 mb-3">Contacto</h2>
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+      Para consultas, sugerencias, reportar errores o cualquier asunto relacionado con SimularCred, puedes escribirnos a:
+    </p>
+    <p class="text-gray-700 dark:text-gray-300 mb-2">
+      📧 <a href="mailto:diegonatylab@gmail.com" class="text-primary-600 dark:text-primary-400 underline font-medium">diegonatylab@gmail.com</a>
+    </p>
     <p class="text-gray-500 dark:text-gray-400 text-sm mt-8">
-      Contacto: <a href="mailto:diegonatylab@gmail.com" class="text-primary-600 dark:text-primary-400 underline">diegonatylab@gmail.com</a>
+      Respondemos todos los correos en un plazo máximo de 48 horas hábiles.
     </p>
   </article>
 </LandingLayout>
