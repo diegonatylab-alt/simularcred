@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateCombos } from '../../lib/landing-combos';
+
+const combos = generateCombos().slice(0, 36);
+---
+
+<BaseLayout
+  title="Simulador de créditos | SimularCred"
+  description="Explora simulaciones de crédito por monto, plazo y tasa para distintos países."
+  canonical="https://simularcred.com/simulador"
+>
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-extrabold text-primary-900 dark:text-primary-100 mb-3">Simulador de créditos</h1>
+    <p class="text-gray-600 dark:text-gray-400 mb-8">
+      Elegí una simulación para ver cuota mensual, intereses y tabla de amortización.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {combos.map((combo) => (
+        <a
+          href={`/simulador/${combo.slug}`}
+          class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-4 text-sm hover:border-primary-400 transition-colors"
+        >
+          <p class="font-semibold text-gray-900 dark:text-gray-100 mb-1">{combo.currency} {combo.amount.toLocaleString('es-MX')}</p>
+          <p class="text-gray-600 dark:text-gray-400">{combo.years} años al {combo.rate}%</p>
+          <p class="text-xs text-primary-700 dark:text-primary-400 mt-2">Ver simulación</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
